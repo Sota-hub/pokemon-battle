@@ -1,10 +1,11 @@
+import { randomNumber } from "../helpers/customFunctions";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import Card from "./Card";
 
 // Generate random number
-const randomNumber1 = Math.floor(Math.random() * 898);
-const randomNumber2 = Math.floor(Math.random() * 898);
-const randomNumber3 = Math.floor(Math.random() * 898);
+const randomNumber1 = randomNumber();
+const randomNumber2 = randomNumber();
+const randomNumber3 = randomNumber();
 
 const CardList = (props) => {
   // fetch with useSWR
