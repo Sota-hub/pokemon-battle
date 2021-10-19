@@ -7,7 +7,6 @@ const SohtaTestPage = () => {
   if (isError) {
     return <div>Something went wrong!</div>;
   }
-  console.log(data);
   return (
     <div>
       <img src={data[0].sprites.other["official-artwork"].front_default} />

@@ -17,9 +17,10 @@ const baseUrl = (query) =>
 
 // Accepts Query as an argument
 export const useFetchPokemon = (queryArray) => {
-  const urls = queryArray.isArray
-    ? queryArray.map((query) => baseUrl(query))
-    : baseUrl(queryArray);
+  const urls =
+    typeof queryArray === "string"
+      ? baseUrl(queryArray)
+      : queryArray.map((query) => baseUrl(query));
   const { data, error } = useSWR(urls, fetcher);
 
   return {
