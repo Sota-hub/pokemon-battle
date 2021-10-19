@@ -1,6 +1,6 @@
-const Card = ({ handleClicked, statsData, dataItem }) => {
+const Card = ({ dataItem }) => {
   return (
-    <div onClick={handleClicked} className={statsData && "chosen"}>
+    <div>
       <img src={dataItem.sprites.front_default} alt={dataItem.forms[0].name} />
       <p>{dataItem.forms[0].name}</p>
     </div>
