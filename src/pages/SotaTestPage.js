@@ -5,11 +5,9 @@ const SotaTestPage = () => {
   if (isError) return <p>"Error!!!!!!!!!!!!!!!!!!!!"</p>;
   if (isLoading) return <p>"Loading!!!!!!!!!!!!!!!!!!"</p>;
 
-  console.log("Sota", data);
-
   return (
     <div>
-      <img src={data[0].sprites.front_default} />
+      <img src={data[0].sprites.front_default} alt="Image of pokemon" />
       <p>Name: {data[0].forms[0].name}</p>
       <p>Height: {data[0].height}</p>
       <p>Weight: {data[0].types.weight}</p>
