@@ -10,10 +10,13 @@ const SohtaTestPage = () => {
   console.log(data);
   return (
     <div>
-      <img src={data[0].sprites.other["official-artwork"].front_default} />
+      <img
+        src={data[0].sprites.other["official-artwork"].front_default}
+        alt="Image of Pokemon"
+      />
       <p>Name: {data[0].name}</p>
       <p>Height:{data[0].height}</p>
-      <p>Weight: {data[0].types.weight}</p>
+      <p>Weight: {data[0].weight}</p>
     </div>
   );
 };
