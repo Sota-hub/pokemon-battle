@@ -1,5 +1,3 @@
-import { useFetchPokemon } from "../hooks/useFetchPokemon";
-
 const Card = ({ handleClicked, statsData, dataItem }) => {
   return (
     <div onClick={handleClicked} className={statsData && "chosen"}>

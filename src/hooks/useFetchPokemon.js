@@ -10,12 +10,16 @@ const fetcher = (...urls) => {
 };
 
 // Base url for pokemon api
-const baseUrl = (query) => `https://pokeapi.co/api/v2/${query}`;
+const baseUrl = (query) =>
+  query
+    ? `https://pokeapi.co/api/v2/${query}`
+    : "https://pokeapi.co/api/v2/pokemon";
 
 // Accepts Query as an argument
 export const useFetchPokemon = (queryArray) => {
-  const urls = queryArray.map((query) => baseUrl(query));
-  console.log(urls);
+  const urls = queryArray.isArray
+    ? queryArray.map((query) => baseUrl(query))
+    : baseUrl(queryArray);
   const { data, error } = useSWR(urls, fetcher);
 
   return {
