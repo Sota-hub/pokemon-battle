@@ -1,4 +1,4 @@
-import Cards from "../components/Cards";
+import CardList from "../components/CardList";
 
 const Landing = () => {
   const storePokemon = (stats) => {
@@ -8,7 +8,7 @@ const Landing = () => {
   return (
     <>
       <h1>Welcome to Pokemon battle</h1>
-      <Cards onStorePokemon={storePokemon} />
+      <CardList onStorePokemon={storePokemon} />
       <h2>Select your first Pokemon</h2>
     </>
   );
