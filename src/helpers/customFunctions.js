@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-export const randomNumber = () => Math.floor(Math.random() * 898);
+export const randomNumber = () => Math.floor(Math.random() * 897) + 1;
 
 export const CountDown = ({ time }) => {
   const { seconds = 60 } = time;

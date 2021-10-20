@@ -23,7 +23,7 @@ const SotaTestPage = () => {
 
   return (
     <div>
-      <img src={data[0].sprites.front_default} alt="Image of pokemon" />
+      <img src={data[0].sprites.front_default} alt={data[0].name} />
       <p>Name: {data[0].forms[0].name}</p>
       <p>Height: {data[0].height}</p>
       <p>Weight: {data[0].types.weight}</p>
