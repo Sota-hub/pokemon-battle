@@ -17,10 +17,3 @@ const userSlice = createSlice({
 export const userActions = userSlice.actions;
 
 export default userSlice;
-
-// userSlice...<-- reducer
-
-// [When "Pokemon select" button is clicked]
-// const storeHandler = () => {
-//   dispatch(userActions.getUser);
-// }
