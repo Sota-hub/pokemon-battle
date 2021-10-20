@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
-import CardList from "../components/CardList";
+import CardListButtons from "../components/CardListButtons";
 
 const Landing = () => {
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState("");
   const [secondChoice, setSecondChoice] = useState("");
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push("/ready");
+  };
 
   return (
     <LandingPage>
       <HeaderClass>Welcome to Pokemon battle</HeaderClass>
-      <LandingForm>
+      <LandingForm onSubmit={handleSubmit}>
         <FormItem>
           <InputLabel>Enter a username to get started</InputLabel>
           <Input
@@ -19,13 +26,21 @@ const Landing = () => {
           />
         </FormItem>
         <FormItem>
-          <InputLabel>Select your first Pokemon</InputLabel>
-          <CardList />
+          <InputLabel firstChoice={firstChoice} setFirstChoice={setFirstChoice}>
+            Select your first Pokemon
+          </InputLabel>
+          <CardListButtons choice="firstChoice" setChoice={setFirstChoice} />
         </FormItem>
         <FormItem>
-          <InputLabel>Select your second Pokemon</InputLabel>
-          <CardList />
+          <InputLabel
+            secondChoice={secondChoice}
+            setSecondChoice={setSecondChoice}
+          >
+            Select your second Pokemon
+          </InputLabel>
+          <CardListButtons choice="secondChoice" setChoice={setSecondChoice} />
         </FormItem>
+        <StartButton type="submit">Start</StartButton>
       </LandingForm>
     </LandingPage>
   );
@@ -72,6 +87,16 @@ const Input = styled.input`
 
 const InputLabel = styled.label`
   font-size: 0.7rem;
+`;
+
+const StartButton = styled.button`
+  text-align: center;
+  justify-self: center;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 50%;
+  border: none;
 `;
 
 export default Landing;
