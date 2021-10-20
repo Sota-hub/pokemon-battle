@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { randomNumber } from "../helpers/customFunctions";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import Card from "./Card";
@@ -7,7 +8,7 @@ const randomNumber1 = randomNumber();
 const randomNumber2 = randomNumber();
 const randomNumber3 = randomNumber();
 
-const CardList = (props) => {
+const CardList = () => {
   // fetch with useSWR
   const { data, isError, isLoading } = useFetchPokemon([
     `pokemon/${randomNumber1}`,
@@ -19,12 +20,16 @@ const CardList = (props) => {
 
   // When fetching is Success
   return (
-    <div>
+    <CardListContainer>
       {data &&
         data.map((dataItem, idx) => <Card key={idx} dataItem={dataItem} />)}
-      <button>Select next Pokemon</button>
-    </div>
+    </CardListContainer>
   );
 };
+
+const CardListContainer = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+`;
 
 export default CardList;
