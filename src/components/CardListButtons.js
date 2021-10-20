@@ -39,7 +39,7 @@ const CardListButtons = ({ choice, setChoice }) => {
               id={`radio-input-${idx}`}
               type="radio"
               name={choice}
-              value={dataItem.name}
+              value={JSON.stringify(dataItem)}
             />
             <Card dataItem={dataItem} />
           </label>
