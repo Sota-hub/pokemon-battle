@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
+import Ready from "./pages/Ready";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       </Route>
       <Route path="/sohta" exact>
         <SohtaTestPage />
+      </Route>
+      <Route path="/ready" exact>
+        <Ready />
       </Route>
     </Switch>
   );
