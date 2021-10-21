@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
-export const randomNumber = () => Math.floor(Math.random() * 897) + 1;
+
+// Generate random number x times
+export const randomNumber = (times) => {
+  const numbers = [];
+  for (let i = 0; i < times; i++) {
+    const num = Math.floor(Math.random() * 897) + 1;
+    if (!numbers.includes(num)) numbers.push(num);
+    else times += 1;
+  }
+  return numbers;
+};
 
 export const CountDown = ({ time }) => {
   const { seconds = 60 } = time;

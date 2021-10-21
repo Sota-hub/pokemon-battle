@@ -5,8 +5,8 @@ import { CountDown } from "../helpers/customFunctions";
 import Card from "../components/Card";
 import styled from "styled-components";
 
-const random1 = randomNumber();
-const random2 = randomNumber();
+const randomNumbers = randomNumber(2);
+
 const First = styled.h2`
   text-align: center;
   margin-top: 25%;
@@ -63,10 +63,9 @@ const Timer = styled(Header.withComponent("div"))`
 `;
 
 const Ready = () => {
-  const { data, isError, isLoading } = useFetchPokemon([
-    `pokemon/${random1}`,
-    `pokemon/${random2}`,
-  ]);
+  const { data, isError, isLoading } = useFetchPokemon(
+    randomNumbers.map((num) => `pokemon/${num}`)
+  );
   if (isError) return <First>failed to load</First>;
   if (isLoading) return <First>loading...</First>;
 
