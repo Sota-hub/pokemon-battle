@@ -48,7 +48,18 @@ const Outer = styled.div`
   border: 3px solid #404040;
   border-radius: 8px;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const StatsContainer = styled.div`
