@@ -44,6 +44,7 @@ const Stats = ({ dataItem }) => {
 };
 
 const Outer = styled.div`
+  width: 200px;
   margin: 10px 5px;
   border: 3px solid #404040;
   border-radius: 8px;
