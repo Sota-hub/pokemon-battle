@@ -1,16 +1,26 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import CardListButtons from "../components/CardListButtons";
+import { userActions } from "../store/userSlice";
 
 const Landing = () => {
   const [userName, setUserName] = useState("");
-  const [firstChoice, setFirstChoice] = useState("");
-  const [secondChoice, setSecondChoice] = useState("");
+  const [firstChoice, setFirstChoice] = useState(null);
+  const [secondChoice, setSecondChoice] = useState(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(
+      userActions.createUser({
+        userName,
+        firstChoice: JSON.parse(firstChoice),
+        secondChoice: JSON.parse(secondChoice),
+      })
+    );
     history.push("/ready");
   };
 
@@ -26,18 +36,11 @@ const Landing = () => {
           />
         </FormItem>
         <FormItem>
-          <InputLabel firstChoice={firstChoice} setFirstChoice={setFirstChoice}>
-            Select your first Pokemon
-          </InputLabel>
+          <InputLabel>Select your first Pokemon</InputLabel>
           <CardListButtons choice="firstChoice" setChoice={setFirstChoice} />
         </FormItem>
         <FormItem>
-          <InputLabel
-            secondChoice={secondChoice}
-            setSecondChoice={setSecondChoice}
-          >
-            Select your second Pokemon
-          </InputLabel>
+          <InputLabel>Select your second Pokemon</InputLabel>
           <CardListButtons choice="secondChoice" setChoice={setSecondChoice} />
         </FormItem>
         <StartButton type="submit">Start</StartButton>
