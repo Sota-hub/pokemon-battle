@@ -1,0 +1,38 @@
+.container {
+  height: 100%;
+  background-color: blue;
+  position: relative;
+}
+
+.enemy {
+  color: white;
+  height: 60%;
+  background: #2a4b5e;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.enemy > p {
+  margin-bottom: 10%;
+  font-size: 3rem;
+}
+
+.you {
+  height: 60%;
+  background: #a7c5c0;
+  clip-path: polygon(0 32%, 100% 0%, 100% 100%, 0 100%);
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.you > p {
+  margin-top: 10%;
+  font-size: 3rem;
+}

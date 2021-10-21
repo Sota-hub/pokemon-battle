@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
+import CutInTest from "./pages/CutInTest";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       </Route>
       <Route path="/sohta" exact>
         <SohtaTestPage />
+      </Route>
+      <Route path="/cutin" exact>
+        <CutInTest />
       </Route>
       <Route path="/ready" exact>
         <Ready />
