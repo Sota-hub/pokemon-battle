@@ -13,7 +13,7 @@ const ChooseInput = styled.input`
   appearance: none;
 `;
 
-const randomNumbers = randomNumber(6);
+const randomNumbers = randomNumber(3);
 
 const CardListButtons = ({ choice, setChoice }) => {
   // fetch with useSWR
