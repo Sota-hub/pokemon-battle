@@ -13,17 +13,13 @@ const ChooseInput = styled.input`
   appearance: none;
 `;
 
-const randomNumber1 = randomNumber();
-const randomNumber2 = randomNumber();
-const randomNumber3 = randomNumber();
+const randomNumbers = randomNumber(6);
 
 const CardListButtons = ({ choice, setChoice }) => {
   // fetch with useSWR
-  const { data, isError, isLoading } = useFetchPokemon([
-    `pokemon/${randomNumber1}`,
-    `pokemon/${randomNumber2}`,
-    `pokemon/${randomNumber3}`,
-  ]);
+  const { data, isError, isLoading } = useFetchPokemon(
+    randomNumbers.map((num) => `pokemon/${num}`)
+  );
 
   // Alternative returns for Error and Loading state
   if (isError) return <div>failed to load</div>;
