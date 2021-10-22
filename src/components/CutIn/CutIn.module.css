@@ -1,11 +1,21 @@
 .container {
   height: 100%;
-  background-color: blue;
+  background-color: black;
   position: relative;
 }
 
+.vs {
+  font-size: 6em;
+  color: #e21717;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+
 .enemy {
-  color: white;
+  color: black;
   height: 60%;
   background: #2a4b5e;
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
@@ -13,14 +23,51 @@
   width: 100%;
   display: flex;
   align-items: center;
+  transform: translateX(-200%);
 }
 
 .enemy > p {
   margin-bottom: 10%;
   font-size: 3rem;
+  z-index: 2;
+  padding: 20% 10% 20% 1%;
+  background: white;
+  clip-path: polygon(
+    100% 0,
+    80% 17%,
+    90% 32%,
+    70% 49%,
+    81% 65%,
+    60% 81%,
+    70% 96%,
+    67% 100%,
+    0 100%,
+    0 0
+  );
+}
+
+.enemy_pokemon1 {
+  width: 38em;
+  height: 38em;
+  position: absolute;
+  top: 0%;
+  left: 28%;
+  overflow: hidden;
+  transform: translateY(-3em);
+}
+
+.enemy_pokemon2 {
+  width: 38em;
+  height: 38em;
+  position: absolute;
+  top: 0%;
+  left: 8%;
+  overflow: hidden;
+  transform: translateY(-3em);
 }
 
 .you {
+  color: white;
   height: 60%;
   background: #a7c5c0;
   clip-path: polygon(0 32%, 100% 0%, 100% 100%, 0 100%);
@@ -30,9 +77,52 @@
   display: flex;
   align-items: center;
   justify-content: right;
+  transform: translateX(200%);
 }
 
 .you > p {
   margin-top: 10%;
   font-size: 3rem;
+  z-index: 2;
+  padding: 20% 1% 20% 20%;
+  background: black;
+  clip-path: polygon(
+    60% 16%,
+    50% 0,
+    100% 0,
+    100% 100%,
+    20% 100%,
+    20% 100%,
+    40% 82%,
+    30% 66%,
+    50% 49%,
+    40% 33%
+  );
+}
+
+.your_pokemon1 {
+  width: 38em;
+  height: 38em;
+  position: absolute;
+  top: 0%;
+  right: 20%;
+  overflow: hidden;
+}
+
+.your_pokemon2 {
+  width: 38em;
+  height: 38em;
+  position: absolute;
+  top: 0%;
+  overflow: hidden;
+}
+
+.poke_images {
+  width: 100%;
+  height: 100%;
+}
+
+.appear {
+  transform: translateX(0);
+  transition: transform 1s ease-in-out;
 }

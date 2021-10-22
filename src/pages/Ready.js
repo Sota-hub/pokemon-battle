@@ -71,7 +71,7 @@ const Ready = () => {
 
   console.log(data);
 
-  const time = { seconds: 5 };
+  const time = { seconds: 3 };
   return (
     <Fragment>
       <Header>Battle start in ...</Header>
