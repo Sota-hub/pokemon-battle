@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
+import BattleHome from "./components/BattleHome";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
       </Route>
       <Route path="/ready" exact>
         <Ready />
+      </Route>
+      <Route path="/battle" exact>
+        <BattleHome />
       </Route>
     </Switch>
   );
