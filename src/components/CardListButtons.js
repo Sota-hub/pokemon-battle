@@ -15,6 +15,18 @@ const ChooseInput = styled.input`
 
 const randomNumbers = randomNumber(6);
 
+const singleCard = (dataItem, idx, choice) => (
+  <label key={`radio-key-${idx}`}>
+    <ChooseInput
+      id={`radio-input-${idx}`}
+      type="radio"
+      name={choice}
+      value={JSON.stringify(dataItem)}
+    />
+    <Card dataItem={dataItem} />
+  </label>
+);
+
 const CardListButtons = ({ choice, setChoice }) => {
   // fetch with useSWR
   const { data, isError, isLoading } = useFetchPokemon(
@@ -25,21 +37,16 @@ const CardListButtons = ({ choice, setChoice }) => {
   if (isError) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
+  const formerData = data.slice(0, 3);
+  const latterData = data.slice(3, 6);
+
   // When fetching is Success
   return (
     <CardListContainer onChange={(e) => setChoice(e.target.value)}>
-      {data &&
-        data.map((dataItem, idx) => (
-          <label key={`radio-key-${idx}`}>
-            <ChooseInput
-              id={`radio-input-${idx}`}
-              type="radio"
-              name={choice}
-              value={JSON.stringify(dataItem)}
-            />
-            <Card dataItem={dataItem} />
-          </label>
-        ))}
+      {choice === "firstChoice" &&
+        formerData?.map((dataItem, idx) => singleCard(dataItem, idx, choice))}
+      {choice === "secondChoice" &&
+        latterData?.map((dataItem, idx) => singleCard(dataItem, idx, choice))}
     </CardListContainer>
   );
 };
