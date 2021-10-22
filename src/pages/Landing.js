@@ -4,8 +4,10 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
-
+import useSound from "use-sound";
+import pokemon from "../sounds/Pokemon";
 const Landing = () => {
+  const [play] = useSound(pokemon);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
