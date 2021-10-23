@@ -71,10 +71,10 @@ const Ready = () => {
   if (isError) return <First>failed to load</First>;
   if (isLoading) return <First>loading...</First>;
 
-  console.log(data);
+  // console.log(data);
 
   const time = { seconds: 5 };
-  console.log(user.firstChoice.id);
+  // console.log(user.firstChoice.id);
   return (
     <Fragment>
       <Header>Battle start in ...</Header>

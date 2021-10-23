@@ -5,9 +5,12 @@ import styled from "styled-components";
 import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
 import useSound from "use-sound";
-import pokemon from "../sounds/Pokemon";
+import pokemon from "../sounds/Pokemon.mp3";
+
+import title from "../sounds/Title.mp3";
 const Landing = () => {
-  const [play] = useSound(pokemon);
+  const [play, { stop, isPlaying }] = useSound(pokemon);
+  const [play2, { stop2, isPlaying2 }] = useSound(title);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
@@ -24,6 +27,15 @@ const Landing = () => {
       })
     );
     history.push("/ready");
+    // play();
+  };
+
+  const onClickHandler = () => {
+    if (isPlaying) {
+      stop();
+    } else {
+      play();
+    }
   };
 
   return (
@@ -45,7 +57,9 @@ const Landing = () => {
           <InputLabel>Select your second Pokemon</InputLabel>
           <CardListButtons choice="secondChoice" setChoice={setSecondChoice} />
         </FormItem>
-        <StartButton type="submit">Start</StartButton>
+        <StartButton type="submit" onClick={onClickHandler}>
+          Start
+        </StartButton>
       </LandingForm>
     </LandingPage>
   );
