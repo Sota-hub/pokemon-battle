@@ -37,9 +37,13 @@ const Landing = () => {
 
   return (
     <LandingPage>
-      <Audio>
-        <ReactAudioPlayer src={title} autoPlay controls volume={0.3} />
-      </Audio>
+      <ReactAudioPlayer
+        style={{ display: "none" }}
+        src={title}
+        autoPlay
+        controls
+        volume={0.3}
+      />
       <HeaderClass>Welcome to Pokemon battle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
         <FormItem>
@@ -116,10 +120,6 @@ const StartButton = styled.button`
   padding: 1rem;
   width: 50%;
   border: none;
-`;
-
-const Audio = styled.div`
-  display: none;
 `;
 
 export default Landing;
