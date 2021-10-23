@@ -26,7 +26,6 @@ const Landing = () => {
       })
     );
     history.push("/ready");
-    // play();
   };
 
   const onClickHandler = () => {
@@ -38,9 +37,9 @@ const Landing = () => {
 
   return (
     <LandingPage>
-      {/* <Audio> */}
-      <ReactAudioPlayer src={title} autoPlay controls />
-      {/* </Audio> */}
+      <Audio>
+        <ReactAudioPlayer src={title} autoPlay controls volume={0.3} />
+      </Audio>
       <HeaderClass>Welcome to Pokemon battle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
         <FormItem>
