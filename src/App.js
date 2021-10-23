@@ -3,7 +3,7 @@ import Landing from "./pages/Landing";
 import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
-import BattleHome from "./components/BattleHome";
+import BattleHome from "./components/BattleHome/BattleHome";
 
 function App() {
   return (
