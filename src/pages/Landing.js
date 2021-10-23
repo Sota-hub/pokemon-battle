@@ -6,11 +6,10 @@ import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
 import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
-
+import ReactAudioPlayer from "react-audio-player";
 import title from "../sounds/Title.mp3";
 const Landing = () => {
-  const [play, { stop, isPlaying }] = useSound(pokemon);
-  const [play2, { stop2, isPlaying2 }] = useSound(title);
+  const [play, { stop }] = useSound(pokemon);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
@@ -31,15 +30,17 @@ const Landing = () => {
   };
 
   const onClickHandler = () => {
-    if (isPlaying) {
+    play();
+    setTimeout(() => {
       stop();
-    } else {
-      play();
-    }
+    }, 5000);
   };
 
   return (
     <LandingPage>
+      {/* <Audio> */}
+      <ReactAudioPlayer src={title} autoPlay controls />
+      {/* </Audio> */}
       <HeaderClass>Welcome to Pokemon battle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
         <FormItem>
@@ -116,6 +117,10 @@ const StartButton = styled.button`
   padding: 1rem;
   width: 50%;
   border: none;
+`;
+
+const Audio = styled.div`
+  display: none;
 `;
 
 export default Landing;
