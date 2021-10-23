@@ -5,6 +5,7 @@ import { CountDown } from "../helpers/customFunctions";
 import { useSelector } from "react-redux";
 import Card from "../components/Card";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const randomNumbers = randomNumber(2);
 
@@ -100,6 +101,7 @@ const Ready = () => {
           </Grid>
         </Content>
       </Wrap>
+      <Link to="battle">aaa</Link>
     </Fragment>
   );
 };
