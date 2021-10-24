@@ -5,8 +5,15 @@
   padding: 0;
 }
 
-body,
+/* body,
 #root {
   height: 100vh;
+} */
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
   font-family: "Press Start 2P", cursive;
 }

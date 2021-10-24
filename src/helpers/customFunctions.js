@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 // Generate random number x times
 export const randomNumber = (times) => {
@@ -12,19 +13,17 @@ export const randomNumber = (times) => {
 };
 
 export const CountDown = ({ time }) => {
+  const history = useHistory();
+
   const { seconds = 60 } = time;
   const [[secs], setTime] = useState([seconds]);
-  const [ticking, setTicking] = useState(true);
   const tick = () => {
-    if (secs === 0) {
-      reset();
-      setTicking(false);
+    if (secs === 1) {
+      history.push("/cutin");
     } else {
       setTime([secs - 1]);
     }
   };
-
-  const reset = () => setTime([parseInt(seconds)]);
 
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);

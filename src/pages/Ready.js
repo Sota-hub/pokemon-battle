@@ -73,8 +73,8 @@ const Ready = () => {
 
   console.log(data);
 
-  const time = { seconds: 5 };
-  console.log(user.firstChoice.id);
+
+  const time = { seconds: 3 };
   return (
     <Fragment>
       <Header>Battle start in ...</Header>
