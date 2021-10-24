@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import { randomNumber } from "../helpers/customFunctions";
 import { CountDown } from "../helpers/customFunctions";
+import { useSelector } from "react-redux";
 import Card from "../components/Card";
 import styled from "styled-components";
 
@@ -63,6 +64,7 @@ const Timer = styled(Header.withComponent("div"))`
 `;
 
 const Ready = () => {
+  const user = useSelector((state) => state.user.user);
   const { data, isError, isLoading } = useFetchPokemon(
     randomNumbers.map((num) => `pokemon/${num}`)
   );
@@ -70,6 +72,7 @@ const Ready = () => {
   if (isLoading) return <First>loading...</First>;
 
   console.log(data);
+
 
   const time = { seconds: 3 };
   return (
@@ -82,10 +85,8 @@ const Ready = () => {
         <Content>
           <Para>Your Pokemon</Para>
           <Grid>
-            {data &&
-              data.map((dataItem, idx) => (
-                <Card key={idx} dataItem={dataItem} />
-              ))}
+            <Card dataItem={user.firstChoice} />
+            <Card dataItem={user.secondChoice} />
           </Grid>
         </Content>
         <Vs>VS</Vs>
