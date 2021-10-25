@@ -6,14 +6,29 @@ import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
 
 const Landing = () => {
+  const [isTouched, setIsTouched] = useState(false);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
+  const enteredNameIsValid = userName.trim() !== "";
+  const nameInputIsInvalid = !enteredNameIsValid && isTouched;
+
+  const nameInputBlurHandler = (event) => {
+    setIsTouched(true);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsTouched(true);
+
+    if (!enteredNameIsValid) {
+      return;
+    }
+
+    setUserName("");
+    setIsTouched(false);
     dispatch(
       userActions.createUser({
         userName,
@@ -21,7 +36,7 @@ const Landing = () => {
         secondChoice: JSON.parse(secondChoice),
       })
     );
-    history.push("/ready");
+    history.replace("/ready");
   };
 
   return (
@@ -31,9 +46,14 @@ const Landing = () => {
         <FormItem>
           <InputLabel>Enter a username to get started</InputLabel>
           <Input
+            type="string"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+            onBlur={nameInputBlurHandler}
           />
+          {nameInputIsInvalid && <Error>Name must not be empty.</Error>}
         </FormItem>
         <FormItem>
           <InputLabel>Select your first Pokemon</InputLabel>
@@ -82,6 +102,7 @@ const FormItem = styled.div`
 `;
 
 const Input = styled.input`
+  position: relative;
   border: none;
   border-radius: 0.4rem;
   outline: none;
@@ -89,6 +110,13 @@ const Input = styled.input`
   background-color: rgba(0, 0, 0, 0.1);
   font: inherit;
   font-size: 0.9rem;
+`;
+
+const Error = styled.p`
+  color: #b40e0e;
+  position: absolute;
+  top: 30%;
+  right: 22%;
 `;
 
 const InputLabel = styled.label`
