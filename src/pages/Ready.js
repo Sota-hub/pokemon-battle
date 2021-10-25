@@ -20,7 +20,7 @@ const Header = styled.h1`
 `;
 
 const Wrap = styled.div`
-  margin-top: 7%;
+  margin-top: -45%;
 `;
 
 const Content = styled.div`
@@ -56,6 +56,7 @@ const Vs = styled.h2`
   width: 50%;
   justify-content: center;
   align-items: center;
+  margin-top: -6%;
 `;
 
 const Timer = styled(Header.withComponent("div"))`
@@ -72,7 +73,6 @@ const Ready = () => {
   if (isLoading) return <First>loading...</First>;
 
   console.log(data);
-
 
   const time = { seconds: 3 };
   return (

@@ -19,7 +19,7 @@ export const CountDown = ({ time }) => {
   const [[secs], setTime] = useState([seconds]);
   const tick = () => {
     if (secs === 1) {
-      history.push("/cutin");
+      history.replace("/cutin");
     } else {
       setTime([secs - 1]);
     }
