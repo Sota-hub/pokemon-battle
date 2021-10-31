@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/Card";
 import styled from "styled-components";
 import { enemyActions } from "../store/enemySlice";
-import { Link } from "react-router-dom";
 
 const randomNumbers = randomNumber(2);
 
@@ -22,7 +21,7 @@ const Header = styled.h1`
 `;
 
 const Wrap = styled.div`
-  margin-top: 7%;
+  margin-top: -45%;
 `;
 
 const Content = styled.div`
@@ -58,6 +57,7 @@ const Vs = styled.h2`
   width: 50%;
   justify-content: center;
   align-items: center;
+  margin-top: -6%;
 `;
 
 const Timer = styled(Header.withComponent("div"))`
@@ -82,7 +82,7 @@ const Ready = () => {
     })
   );
 
-  const time = { seconds: 5 };
+  const time = { seconds: 3 };
   return (
     <Fragment>
       <Header>Battle start in ...</Header>

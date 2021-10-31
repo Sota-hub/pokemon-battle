@@ -6,14 +6,29 @@ import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
 
 const Landing = () => {
+  const [isTouched, setIsTouched] = useState(false);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
+  const enteredNameIsValid = userName.trim() !== "";
+  const nameInputIsInvalid = !enteredNameIsValid && isTouched;
+
+  const nameInputBlurHandler = (event) => {
+    setIsTouched(true);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsTouched(true);
+
+    if (!enteredNameIsValid) {
+      return;
+    }
+
+    setUserName("");
+    setIsTouched(false);
     dispatch(
       userActions.createUser({
         userName,
@@ -21,19 +36,24 @@ const Landing = () => {
         secondChoice: JSON.parse(secondChoice),
       })
     );
-    history.push("/ready");
+    history.replace("/ready");
   };
 
   return (
     <LandingPage>
-      <HeaderClass>Welcome to Pokemon battle</HeaderClass>
+      <HeaderClass>Pokébattle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
         <FormItem>
           <InputLabel>Enter a username to get started</InputLabel>
           <Input
+            type="string"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+            onBlur={nameInputBlurHandler}
           />
+          {nameInputIsInvalid && <Error>Name must not be empty.</Error>}
         </FormItem>
         <FormItem>
           <InputLabel>Select your first Pokemon</InputLabel>
@@ -54,7 +74,7 @@ const LandingPage = styled.main`
   gap: 1rem;
   justify-content: center;
   align-content: baseline;
-  height: 100%;
+  height: 100vh;
 `;
 
 const HeaderClass = styled.h1`
@@ -67,6 +87,7 @@ const HeaderClass = styled.h1`
 
 const LandingForm = styled.form`
   display: grid;
+  height: 80vh;
 `;
 
 const FormItem = styled.div`
@@ -81,25 +102,37 @@ const FormItem = styled.div`
 `;
 
 const Input = styled.input`
+  position: relative;
   border: none;
   border-radius: 0.4rem;
   outline: none;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   background-color: rgba(0, 0, 0, 0.1);
+  font: inherit;
+  font-size: 0.9rem;
+`;
+
+const Error = styled.p`
+  color: #b40e0e;
+  position: absolute;
+  top: 30%;
+  right: 22%;
 `;
 
 const InputLabel = styled.label`
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 `;
 
 const StartButton = styled.button`
   text-align: center;
   justify-self: center;
   border-radius: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 1rem;
-  width: 50%;
+  width: 30%;
   border: none;
+  font: inherit;
+  text-transform: uppercase;
 `;
 
 export default Landing;
