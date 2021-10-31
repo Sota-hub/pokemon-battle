@@ -32,7 +32,19 @@ const CardLabel = styled.label`
   }
 `;
 
-const randomNumbers = randomNumber(3);
+const randomNumbers = randomNumber(6);
+
+const singleCard = (dataItem, idx, choice) => (
+  <CardLabel key={`radio-key-${idx}`}>
+    <ChooseInput
+      id={`radio-input-${idx}`}
+      type="radio"
+      name={choice}
+      value={JSON.stringify(dataItem)}
+    />
+    <Card dataItem={dataItem} />
+  </CardLabel>
+);
 
 const CardListButtons = ({ choice, setChoice }) => {
   // fetch with useSWR
@@ -44,21 +56,16 @@ const CardListButtons = ({ choice, setChoice }) => {
   if (isError) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
+  const formerData = data.slice(0, 3);
+  const latterData = data.slice(3, 6);
+
   // When fetching is Success
   return (
     <CardListContainer onChange={(e) => setChoice(e.target.value)}>
-      {data &&
-        data.map((dataItem, idx) => (
-          <CardLabel key={`radio-key-${idx}`}>
-            <ChooseInput
-              id={`radio-input-${idx}`}
-              type="radio"
-              name={choice}
-              value={JSON.stringify(dataItem)}
-            />
-            <Card dataItem={dataItem} />
-          </CardLabel>
-        ))}
+      {choice === "firstChoice" &&
+        formerData?.map((dataItem, idx) => singleCard(dataItem, idx, choice))}
+      {choice === "secondChoice" &&
+        latterData?.map((dataItem, idx) => singleCard(dataItem, idx, choice))}
     </CardListContainer>
   );
 };
