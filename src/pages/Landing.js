@@ -4,8 +4,13 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import CardListButtons from "../components/CardListButtons";
 import { userActions } from "../store/userSlice";
+import useSound from "use-sound";
+import pokemon from "../sounds/Pokemon.mp3";
+import ReactAudioPlayer from "react-audio-player";
+import title from "../sounds/Title.mp3";
 
 const Landing = () => {
+  const [play, { stop }] = useSound(pokemon);
   const [isTouched, setIsTouched] = useState(false);
   const [userName, setUserName] = useState("");
   const [firstChoice, setFirstChoice] = useState(null);
@@ -39,9 +44,23 @@ const Landing = () => {
     history.replace("/ready");
   };
 
+  const onClickHandler = () => {
+    play();
+    setTimeout(() => {
+      stop();
+    }, 5000);
+  };
+
   return (
     <LandingPage>
-      <HeaderClass>Pokébattle</HeaderClass>
+      <ReactAudioPlayer
+        style={{ display: "none" }}
+        src={title}
+        autoPlay
+        controls
+        volume={0.3}
+      />
+      <HeaderClass>Welcome to Pokemon battle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
         <FormItem>
           <InputLabel>Enter a username to get started</InputLabel>
@@ -63,7 +82,9 @@ const Landing = () => {
           <InputLabel>Select your second Pokemon</InputLabel>
           <CardListButtons choice="secondChoice" setChoice={setSecondChoice} />
         </FormItem>
-        <StartButton type="submit">Start</StartButton>
+        <StartButton type="submit" onClick={onClickHandler}>
+          Start
+        </StartButton>
       </LandingForm>
     </LandingPage>
   );
