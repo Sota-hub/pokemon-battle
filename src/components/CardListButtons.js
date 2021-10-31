@@ -32,10 +32,10 @@ const CardLabel = styled.label`
   }
 `;
 
-const randomNumbers = randomNumber(3);
+const randomNumbers = randomNumber(6);
 
 const singleCard = (dataItem, idx, choice) => (
-  <label key={`radio-key-${idx}`}>
+  <CardLabel key={`radio-key-${idx}`}>
     <ChooseInput
       id={`radio-input-${idx}`}
       type="radio"
@@ -43,7 +43,7 @@ const singleCard = (dataItem, idx, choice) => (
       value={JSON.stringify(dataItem)}
     />
     <Card dataItem={dataItem} />
-  </label>
+  </CardLabel>
 );
 
 const CardListButtons = ({ choice, setChoice }) => {
