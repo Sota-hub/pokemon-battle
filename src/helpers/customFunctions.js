@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
+import useSound from "use-sound";
+import cutIn from "../sounds/cut-in.mp3";
 
 // Generate random number x times
 export const randomNumber = (times) => {
@@ -12,19 +15,18 @@ export const randomNumber = (times) => {
 };
 
 export const CountDown = ({ time }) => {
+  const history = useHistory();
+  const [play] = useSound(cutIn);
   const { seconds = 60 } = time;
   const [[secs], setTime] = useState([seconds]);
-  const [ticking, setTicking] = useState(true);
   const tick = () => {
-    if (secs === 0) {
-      reset();
-      setTicking(false);
+    if (secs === 1) {
+      history.replace("/cutin");
+      play();
     } else {
       setTime([secs - 1]);
     }
   };
-
-  const reset = () => setTime([parseInt(seconds)]);
 
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);

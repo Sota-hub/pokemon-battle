@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.23.0",
     "react": "^17.0.2",
+    "react-audio-player": "^0.17.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
@@ -17,6 +18,7 @@
     "styled-components": "^5.3.1",
     "swr": "^1.0.1",
     "typeit-react": "^2.0.3",
+    "use-sound": "^4.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

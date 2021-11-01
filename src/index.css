@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+/* body,
+#root {
+  height: 100vh;
+} */
+
 html,
 body,
 #root,
