@@ -2,9 +2,10 @@ import { Fragment } from "react";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import { randomNumber } from "../helpers/customFunctions";
 import { CountDown } from "../helpers/customFunctions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/Card";
 import styled from "styled-components";
+import { enemyActions } from "../store/enemySlice";
 
 const randomNumbers = randomNumber(2);
 
@@ -20,7 +21,7 @@ const Header = styled.h1`
 `;
 
 const Wrap = styled.div`
-  margin-top: 7%;
+  margin-top: -45%;
 `;
 
 const Content = styled.div`
@@ -56,6 +57,7 @@ const Vs = styled.h2`
   width: 50%;
   justify-content: center;
   align-items: center;
+  margin-top: -6%;
 `;
 
 const Timer = styled(Header.withComponent("div"))`
@@ -64,6 +66,8 @@ const Timer = styled(Header.withComponent("div"))`
 `;
 
 const Ready = () => {
+  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user.user);
   const { data, isError, isLoading } = useFetchPokemon(
     randomNumbers.map((num) => `pokemon/${num}`)
@@ -71,8 +75,12 @@ const Ready = () => {
   if (isError) return <First>failed to load</First>;
   if (isLoading) return <First>loading...</First>;
 
-  console.log(data);
-
+  dispatch(
+    enemyActions.createEnemy({
+      firstEnemy: data[0],
+      secondEnemy: data[1],
+    })
+  );
 
   const time = { seconds: 3 };
   return (
