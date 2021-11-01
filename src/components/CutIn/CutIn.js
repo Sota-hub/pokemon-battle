@@ -7,6 +7,8 @@ const CutIn = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const poke = useSelector((state) => state.user.user);
+  const enemy = useSelector((state) => state.enemy.enemy);
+  console.log(enemy);
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,18 +25,18 @@ const CutIn = () => {
           <img
             className={classes.poke_images}
             src={
-              poke.firstChoice.sprites.other["official-artwork"].front_default
+              enemy.firstEnemy.sprites.other["official-artwork"].front_default
             }
-            alt={poke.firstChoice.forms[0].name}
+            alt={enemy.firstEnemy.forms[0].name}
           />
         </div>
         <div className={classes.enemy_pokemon2}>
           <img
             className={classes.poke_images}
             src={
-              poke.secondChoice.sprites.other["official-artwork"].front_default
+              enemy.secondEnemy.sprites.other["official-artwork"].front_default
             }
-            alt={poke.secondChoice.forms[0].name}
+            alt={enemy.secondEnemy.forms[0].name}
           />
         </div>
       </div>
