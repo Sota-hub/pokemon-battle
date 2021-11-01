@@ -32,7 +32,7 @@ const Landing = () => {
     play();
     setTimeout(() => {
       stop();
-    }, 5000);
+    }, 3500);
   };
 
   return (

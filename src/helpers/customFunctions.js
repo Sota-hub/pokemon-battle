@@ -1,4 +1,10 @@
 import { useState, useEffect } from "react";
+<<<<<<< Updated upstream
+=======
+import { useHistory } from "react-router";
+import useSound from "use-sound";
+import cutIn from "../sounds/cut-in.mp3";
+>>>>>>> Stashed changes
 
 // Generate random number x times
 export const randomNumber = (times) => {
@@ -12,13 +18,24 @@ export const randomNumber = (times) => {
 };
 
 export const CountDown = ({ time }) => {
+<<<<<<< Updated upstream
+=======
+  const history = useHistory();
+  const [play, { stop }] = useSound(cutIn);
+>>>>>>> Stashed changes
   const { seconds = 60 } = time;
   const [[secs], setTime] = useState([seconds]);
   const [ticking, setTicking] = useState(true);
   const tick = () => {
+<<<<<<< Updated upstream
     if (secs === 0) {
       reset();
       setTicking(false);
+=======
+    if (secs === 1) {
+      history.replace("/cutin");
+      play();
+>>>>>>> Stashed changes
     } else {
       setTime([secs - 1]);
     }
