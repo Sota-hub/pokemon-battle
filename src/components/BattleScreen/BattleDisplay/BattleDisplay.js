@@ -1,27 +1,14 @@
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import classes from "./BattleDisplay.module.scss";
 
-const navLink = (path, string) => (
-  <NavLink
-    to={path}
-    className={classes.link_style}
-    activeClassName={classes.active}
-  >
-    {string}
-  </NavLink>
-);
-
-const BattleDisplay = () => {
+const BattleDisplay = (props) => {
   const user = useSelector((state) => state.user.user);
-
-  console.log(user.firstChoice);
+  const enemy = useSelector((state) => state.enemy.enemy);
 
   return (
     <div className={classes.display}>
       <div className={classes.enemy_hp}>
-        <p>{user.firstChoice.forms[0].name}</p>
+        <p>{enemy.firstEnemy.forms[0].name}</p>
         <progress
           className={classes.hp_bar}
           id="hp"
@@ -30,7 +17,12 @@ const BattleDisplay = () => {
         ></progress>
       </div>
       <div className={classes.user_image}>
-        <img src={user.firstChoice.sprites.back_default} />
+        <img
+          src={
+            user.firstChoice.sprites.back_default
+            // versions["generation-v"]["black-white"].animated.back_default
+          }
+        />
       </div>
       <div className={classes.user_hp}>
         <p>{user.firstChoice.forms[0].name}</p>
@@ -42,13 +34,19 @@ const BattleDisplay = () => {
         ></progress>
       </div>
       <div className={classes.enemy_image}>
-        <img src={user.firstChoice.sprites.front_default} />
+        <img src={enemy.firstEnemy.sprites.front_default} />
       </div>
-      <div className={classes.link_container}>
-        {navLink("/battle", "Fight")}
-        {navLink("/battle_change", "Change")}
-        {navLink("/battle_item", "Item")}
-      </div>
+      <ul className={classes.link_container}>
+        <li className={classes.link_style} onClick={props.onFight}>
+          Fight
+        </li>
+        <li className={classes.link_style} onClick={props.onChange}>
+          Change
+        </li>
+        <li className={classes.link_style} onClick={props.onItem}>
+          Item
+        </li>
+      </ul>
     </div>
   );
 };
