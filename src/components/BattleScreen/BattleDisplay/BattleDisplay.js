@@ -18,12 +18,8 @@ const BattleDisplay = (props) => {
       </div>
       <div className={classes.user_image}>
         <img
-          src={
-            user.firstChoice.sprites.back_default
-
-            // versions["generation-v"]["black-white"].animated.back_default
-          }
-          ait="first choice pokemon"
+          src={user.firstChoice.sprites.back_default}
+          ait={user.firstChoice.forms[0].name}
         />
       </div>
       <div className={classes.user_hp}>
@@ -38,7 +34,7 @@ const BattleDisplay = (props) => {
       <div className={classes.enemy_image}>
         <img
           src={enemy.firstEnemy.sprites.front_default}
-          alt="first choice enemy"
+          ait={enemy.firstEnemy.forms[0].name}
         />
       </div>
       <ul className={classes.link_container}>

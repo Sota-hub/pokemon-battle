@@ -24,9 +24,9 @@ const Battle = () => {
     setCommand("item");
   };
 
-  const togglePokemon = () => {
-    setIsSecondPokemon(!isSecondPokemon);
-  };
+  // const togglePokemon = () => {
+  //   setIsSecondPokemon(!isSecondPokemon);
+  // };
 
   return (
     <GridContainer>
