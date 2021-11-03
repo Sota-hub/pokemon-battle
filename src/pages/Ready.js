@@ -104,7 +104,7 @@ const Ready = () => {
           <Grid>
             {data &&
               data.map((dataItem, idx) => (
-                <Card key={idx} dataItem={dataItem} />
+                <Card key={`ready-${idx}`} dataItem={dataItem} />
               ))}
           </Grid>
         </Content>

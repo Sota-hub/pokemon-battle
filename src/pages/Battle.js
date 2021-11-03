@@ -10,6 +10,7 @@ import BattleMessage from "../components/BattleScreen/BattleMessage/BattleMessag
 
 const Battle = () => {
   const [command, setCommand] = useState("home");
+  const [isSecondPokemon, setIsSecondPokemon] = useState(false);
 
   const fightCommand = () => {
     setCommand("fight");
@@ -23,6 +24,10 @@ const Battle = () => {
     setCommand("item");
   };
 
+  const togglePokemon = () => {
+    setIsSecondPokemon(!isSecondPokemon);
+  };
+
   return (
     <GridContainer>
       <BattleDisplay
@@ -30,8 +35,10 @@ const Battle = () => {
         onChange={changeCommand}
         onItem={itemCommand}
       />
-      {command === "home" && <BattleHome page="home" />}
-      {command === "fight" && <BattleFight />}
+      {command === "home" && (
+        <BattleHome page="home" isSecondPokemon={isSecondPokemon} />
+      )}
+      {command === "fight" && <BattleFight isSecondPokemon={isSecondPokemon} />}
       {command === "change" && <BattleChange />}
       {command === "item" && <BattleItem />}
       <BattleMessage />

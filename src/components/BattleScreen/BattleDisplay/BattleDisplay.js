@@ -20,8 +20,10 @@ const BattleDisplay = (props) => {
         <img
           src={
             user.firstChoice.sprites.back_default
+
             // versions["generation-v"]["black-white"].animated.back_default
           }
+          ait="first choice pokemon"
         />
       </div>
       <div className={classes.user_hp}>
@@ -34,7 +36,10 @@ const BattleDisplay = (props) => {
         ></progress>
       </div>
       <div className={classes.enemy_image}>
-        <img src={enemy.firstEnemy.sprites.front_default} />
+        <img
+          src={enemy.firstEnemy.sprites.front_default}
+          alt="first choice enemy"
+        />
       </div>
       <ul className={classes.link_container}>
         <li className={classes.link_style} onClick={props.onFight}>

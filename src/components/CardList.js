@@ -27,7 +27,9 @@ const CardList = () => {
   return (
     <CardListContainer>
       {data &&
-        data.map((dataItem, idx) => <Card key={idx} dataItem={dataItem} />)}
+        data.map((dataItem, idx) => (
+          <Card key={`card-list-${idx}`} dataItem={dataItem} />
+        ))}
     </CardListContainer>
   );
 };
