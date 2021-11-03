@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 import classes from "./CutIn.module.css";
 
 const CutIn = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const history = useHistory();
 
   const poke = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
@@ -13,7 +16,10 @@ const CutIn = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 50);
+    }, 0);
+    setTimeout(() => {
+      history.replace("battle");
+    }, 3000);
   });
 
   return (
