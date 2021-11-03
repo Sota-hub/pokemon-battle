@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import styled from "styled-components";
-import Stats from "./Stats";
+import Stats from "../Stats";
 
 const Card = ({ dataItem }) => {
   const [isShown, setIsShown] = useState(false);

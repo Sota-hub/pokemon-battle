@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { randomNumber } from "../helpers/customFunctions";
-import { useFetchPokemon } from "../hooks/useFetchPokemon";
+import { randomNumber } from "../../helpers/customFunctions";
+import { useFetchPokemon } from "../../hooks/useFetchPokemon";
 import Card from "./Card";
 
 // Styled components
 const CardListContainer = styled.div`
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 `;
 
@@ -20,15 +20,10 @@ const ChooseInput = styled.input`
 
 const CardLabel = styled.label`
   border-radius: 0.5rem;
-  filter: drop-shadow(0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.5));
   :hover,
   + input:checked {
     background-color: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.5);
-    filter: drop-shadow(0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.5));
-    box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -41,6 +36,7 @@ const singleCard = (dataItem, idx, choice) => (
       type="radio"
       name={choice}
       value={JSON.stringify(dataItem)}
+      required
     />
     <Card dataItem={dataItem} />
   </CardLabel>
