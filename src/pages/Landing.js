@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import CardListButtons from "../components/CardListButtons";
+import CardListButtons from "../components/LandingCards/CardListButtons";
 import { userActions } from "../store/userSlice";
 import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
@@ -71,6 +71,7 @@ const Landing = () => {
               setUserName(e.target.value);
             }}
             onBlur={nameInputBlurHandler}
+            required
           />
           {nameInputIsInvalid && <Error>Name must not be empty.</Error>}
         </FormItem>

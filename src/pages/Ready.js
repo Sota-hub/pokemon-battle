@@ -3,7 +3,7 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import { randomNumber } from "../helpers/customFunctions";
 import { CountDown } from "../helpers/customFunctions";
 import { useSelector, useDispatch } from "react-redux";
-import Card from "../components/Card";
+import Card from "../components/LandingCards/Card";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { enemyActions } from "../store/enemySlice";
