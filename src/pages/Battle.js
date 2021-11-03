@@ -10,7 +10,7 @@ import BattleMessage from "../components/BattleScreen/BattleMessage/BattleMessag
 
 const Battle = () => {
   const [command, setCommand] = useState("home");
-  const [isSecondPokemon, setIsSecondPokemon] = useState(false);
+  const [isSecondPokemon /*setIsSecondPokemon*/] = useState(false);
 
   const fightCommand = () => {
     setCommand("fight");
