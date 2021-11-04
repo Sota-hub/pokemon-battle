@@ -39,4 +39,23 @@ export const CountDown = ({ time }) => {
     </div>
   );
 };
-// export const PopUp = () => {};
+
+// pick four moves randomly for fight command
+export const pickRandomFourMoves = (array) => {
+  // Prevent to mutate the state
+  let copiedArray = [...array];
+  let movesArray = [];
+
+  while (movesArray.length < 4) {
+    if (copiedArray.length < 4) {
+      movesArray = copiedArray;
+      break;
+    }
+
+    const randomMove = Math.floor(Math.random() * copiedArray.length);
+    movesArray.push(copiedArray[randomMove]);
+    copiedArray.splice(randomMove, 1);
+  }
+
+  return movesArray;
+};

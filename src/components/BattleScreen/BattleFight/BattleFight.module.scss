@@ -1,0 +1,25 @@
+.menu_details {
+  display: grid;
+  grid-column: 3;
+  grid-row: 1 / 11;
+  padding: 2em;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1em ridge rgba(124, 124, 124, 0.6);
+  border-radius: 1em;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  padding: 3em 6em;
+  margin-bottom: 1em;
+
+  &:hover {
+    background: #3b3b3b;
+    border: 1em solid #777777;
+    color: #fff;
+  }
+}
