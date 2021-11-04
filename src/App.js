@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
+import Battle from "./pages/Battle";
 import CutIn from "./components/CutIn/CutIn";
 
 function App() {
@@ -23,6 +24,12 @@ function App() {
       </Route>
       <Route path="/sohta" exact>
         <SohtaTestPage />
+      </Route>
+      <Route path="/ready" exact>
+        <Ready />
+      </Route>
+      <Route path="/battle" exact>
+        <Battle />
       </Route>
     </Switch>
   );
