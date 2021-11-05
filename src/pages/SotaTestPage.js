@@ -22,8 +22,6 @@ const SotaTestPage = () => {
     );
   };
 
-  console.log(enemy);
-
   return (
     <div>
       <img src={data[0].sprites.front_default} alt={data[0].name} />

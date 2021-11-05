@@ -11,7 +11,6 @@ const CutIn = () => {
 
   const poke = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
-  console.log(enemy);
 
   useEffect(() => {
     setTimeout(() => {

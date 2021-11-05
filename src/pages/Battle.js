@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { pickRandomFourMoves } from "../helpers/customFunctions";
 import styled from "styled-components";
 
 import BattleDisplay from "../components/BattleScreen/BattleDisplay/BattleDisplay";
@@ -8,18 +10,42 @@ import BattleChange from "../components/BattleScreen/BattleChange/BattleChange";
 import BattleItem from "../components/BattleScreen/BattleItem/BattleItem";
 import BattleMessage from "../components/BattleScreen/BattleMessage/BattleMessage";
 
+let firstPokemonMoves = null;
+let secondPokemonMoves = null;
+
 const Battle = () => {
+  const user = useSelector((state) => state.user.user);
+  const enemy = useSelector((state) => state.enemy.enemy);
   const [command, setCommand] = useState("home");
   const [isSecondPokemon /*setIsSecondPokemon*/] = useState(false);
+  const [isFirstEnemyDead /*setIsFirstEnemyDead*/] = useState(false);
+
+  // ======== Define pokemon moves here to prevent re-render bug ========
+  useEffect(() => {
+    firstPokemonMoves = pickRandomFourMoves(user.firstChoice.moves);
+    secondPokemonMoves = pickRandomFourMoves(user.secondChoice.moves);
+  }, []);
+  // =====================================================================
+
+  // ===== Event is executed at BattleFight.js and the result is reflected at BattleDisplay =====
+  let [firstEnemyHp, setFirstEnemyHp] = useState(
+    enemy.firstEnemy.stats[0].base_stat
+  );
+  let [secondEnemyHp, setSecondEnemyHp] = useState(
+    enemy.secondEnemy.stats[0].base_stat
+  );
+  const damageHandler = (damage) => {
+    if (!isSecondPokemon) setFirstEnemyHp((firstEnemyHp -= damage));
+    if (isSecondPokemon) setSecondEnemyHp((secondEnemyHp -= damage));
+  };
+  // =============================================================================================
 
   const fightCommand = () => {
     setCommand("fight");
   };
-
   const changeCommand = () => {
     setCommand("change");
   };
-
   const itemCommand = () => {
     setCommand("item");
   };
@@ -34,11 +60,20 @@ const Battle = () => {
         onFight={fightCommand}
         onChange={changeCommand}
         onItem={itemCommand}
+        isSecondPokemon={isSecondPokemon}
+        isFirstEnemyDead={isFirstEnemyDead}
+        firstEnemyHitPoint={firstEnemyHp}
+        secondEnemyHitPoint={secondEnemyHp}
       />
-      {command === "home" && (
-        <BattleHome page="home" isSecondPokemon={isSecondPokemon} />
+      {command === "home" && <BattleHome page="home" />}
+      {command === "fight" && (
+        <BattleFight
+          isSecondPokemon={isSecondPokemon}
+          firstPokemonMoves={firstPokemonMoves}
+          secondPokemonMoves={secondPokemonMoves}
+          damageHandler={damageHandler}
+        />
       )}
-      {command === "fight" && <BattleFight isSecondPokemon={isSecondPokemon} />}
       {command === "change" && <BattleChange />}
       {command === "item" && <BattleItem />}
       <BattleMessage />
