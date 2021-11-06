@@ -19,6 +19,8 @@ const Battle = () => {
   const [command, setCommand] = useState("home");
   const [isSecondPokemon /*setIsSecondPokemon*/] = useState(false);
   const [isFirstEnemyDead /*setIsFirstEnemyDead*/] = useState(false);
+  let initialMessage = `AI sent out ${enemy.firstEnemy.forms[0].name}! Go ${user.firstChoice.forms[0].name}!`;
+  const [moveMessage, setMoveMessage] = useState(initialMessage);
 
   // ======== Define pokemon moves here to prevent re-render bug ========
   useEffect(() => {
@@ -72,11 +74,12 @@ const Battle = () => {
           firstPokemonMoves={firstPokemonMoves}
           secondPokemonMoves={secondPokemonMoves}
           damageHandler={damageHandler}
+          setMoveMessage={setMoveMessage}
         />
       )}
       {command === "change" && <BattleChange />}
       {command === "item" && <BattleItem />}
-      <BattleMessage />
+      <BattleMessage moveMessage={moveMessage} />
     </GridContainer>
   );
 };

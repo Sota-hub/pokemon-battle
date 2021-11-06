@@ -6,8 +6,8 @@ const fetcher = async (url) => {
   return data;
 };
 
-export const useFetchMove = (query) => {
-  const url = `https://pokeapi.co/api/v2/move/${query}/`;
+export const useFetchMove = (moveId) => {
+  const url = `https://pokeapi.co/api/v2/move/${moveId}/`;
   const { data, error } = useSWR(url, fetcher);
 
   if (error) return <div>failed to load</div>;
