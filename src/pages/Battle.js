@@ -19,8 +19,6 @@ const Battle = () => {
   const [command, setCommand] = useState("home");
   const [isSecondPokemon /*setIsSecondPokemon*/] = useState(false);
   const [isFirstEnemyDead /*setIsFirstEnemyDead*/] = useState(false);
-  let initialMessage = `AI sent out ${enemy.firstEnemy.forms[0].name}! Go ${user.firstChoice.forms[0].name}!`;
-  const [moveMessage, setMoveMessage] = useState(initialMessage);
 
   // ======== Define pokemon moves here to prevent re-render bug ========
   useEffect(() => {
@@ -42,6 +40,13 @@ const Battle = () => {
   };
   // =============================================================================================
 
+  // ================================= Update a massage on the basis of a move =================================
+  let initialMessage = `AI sent out ${enemy.firstEnemy.forms[0].name}! Go ${user.firstChoice.forms[0].name}!`;
+  const [moveMessage, setMoveMessage] = useState(initialMessage);
+  const [moveSource, setMoveSource] = useState("");
+  // ===========================================================================================================
+
+  // === Switch the command bars ===
   const fightCommand = () => {
     setCommand("fight");
   };
@@ -51,6 +56,7 @@ const Battle = () => {
   const itemCommand = () => {
     setCommand("item");
   };
+  // ================================
 
   // const togglePokemon = () => {
   //   setIsSecondPokemon(!isSecondPokemon);
@@ -75,11 +81,12 @@ const Battle = () => {
           secondPokemonMoves={secondPokemonMoves}
           damageHandler={damageHandler}
           setMoveMessage={setMoveMessage}
+          setMoveSource={setMoveSource}
         />
       )}
       {command === "change" && <BattleChange />}
       {command === "item" && <BattleItem />}
-      <BattleMessage moveMessage={moveMessage} />
+      <BattleMessage moveMessage={moveMessage} moveSource={moveSource} />
     </GridContainer>
   );
 };
