@@ -10,7 +10,7 @@ const BattleFight = ({
   secondPokemonMoves,
   damageHandler,
   setMoveMessage,
-  setMoveSource,
+  setMoveUsed,
 }) => {
   const user = useSelector((state) => state.user.user);
   const [moveNumber, setMoveNumber] = useState(0);
@@ -35,7 +35,7 @@ const BattleFight = ({
   const decideMove = () => {
     damageHandler(calcDamage(power, attack, defence));
     setMoveMessage(data.name);
-    setMoveSource("User");
+    setMoveUsed("User used");
     // user.firstChoice.stats[5].base_stat "speed";
   };
 

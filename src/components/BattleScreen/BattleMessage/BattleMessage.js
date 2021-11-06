@@ -1,8 +1,8 @@
 import TypeIt from "typeit-react";
 import classes from "./BattleMessage.module.scss";
 
-const BattleMessage = ({ moveMessage, moveSource }) => {
-  let message = `${moveSource} used ${moveMessage}`;
+const BattleMessage = ({ moveMessage, moveUsed }) => {
+  let message = `${moveUsed} ${moveMessage}`;
 
   return (
     <div className={classes.message_outer_container}>

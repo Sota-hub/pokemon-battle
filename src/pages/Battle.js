@@ -24,7 +24,7 @@ const Battle = () => {
   useEffect(() => {
     firstPokemonMoves = pickRandomFourMoves(user.firstChoice.moves);
     secondPokemonMoves = pickRandomFourMoves(user.secondChoice.moves);
-  }, []);
+  }, [user.firstChoice.moves, user.secondChoice.moves]);
   // =====================================================================
 
   // ===== Event is executed at BattleFight.js and the result is reflected at BattleDisplay =====
@@ -43,7 +43,7 @@ const Battle = () => {
   // ================================= Update a massage on the basis of a move =================================
   let initialMessage = `AI sent out ${enemy.firstEnemy.forms[0].name}! Go ${user.firstChoice.forms[0].name}!`;
   const [moveMessage, setMoveMessage] = useState(initialMessage);
-  const [moveSource, setMoveSource] = useState("");
+  const [moveUsed, setMoveUsed] = useState("");
   // ===========================================================================================================
 
   // === Switch the command bars ===
@@ -81,12 +81,12 @@ const Battle = () => {
           secondPokemonMoves={secondPokemonMoves}
           damageHandler={damageHandler}
           setMoveMessage={setMoveMessage}
-          setMoveSource={setMoveSource}
+          setMoveUsed={setMoveUsed}
         />
       )}
       {command === "change" && <BattleChange />}
       {command === "item" && <BattleItem />}
-      <BattleMessage moveMessage={moveMessage} moveSource={moveSource} />
+      <BattleMessage moveMessage={moveMessage} moveUsed={moveUsed} />
     </GridContainer>
   );
 };
