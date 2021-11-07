@@ -9,6 +9,8 @@ const BattleDisplay = ({
   isFirstEnemyDead,
   firstEnemyHitPoint,
   secondEnemyHitPoint,
+  firstPokemonHitPoint,
+  secondPokemonHitPoint,
 }) => {
   const user = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
@@ -17,8 +19,6 @@ const BattleDisplay = ({
   const secondUserName = user.secondChoice.forms[0].name;
   const firstEnemyName = enemy.firstEnemy.forms[0].name;
   const secondEnemyName = enemy.secondEnemy.forms[0].name;
-  let firstUserHp = user.firstChoice.stats[0].base_stat;
-  let secondUserHp = user.secondChoice.stats[0].base_stat;
 
   return (
     <div className={classes.display}>
@@ -50,7 +50,7 @@ const BattleDisplay = ({
         <progress
           className={classes.hp_bar}
           id="hp"
-          value={isSecondPokemon ? secondUserHp : firstUserHp}
+          value={isSecondPokemon ? secondPokemonHitPoint : firstPokemonHitPoint}
           max={
             isSecondPokemon
               ? user.secondChoice.stats[0].base_stat

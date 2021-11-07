@@ -65,6 +65,6 @@ export const pickRandomFourMoves = (array) => {
 // "defence" = user.xxxChoice.stats[2].base_stat / enemy.xxxEnemy.stats[2].base_stat
 export const calcDamage = (power, attack, defence) => {
   const formula1 = (2 * Math.floor((power * attack) / defence)) / 50 + 2;
-  const formula2 = (Math.floor(Math.random() * (101 - 85)) + 85) / 50;
+  const formula2 = (Math.floor(Math.random() * (101 - 85)) + 85) / 25;
   return Math.floor(formula1 * formula2);
 };

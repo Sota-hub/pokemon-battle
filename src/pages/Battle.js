@@ -12,6 +12,8 @@ import BattleMessage from "../components/BattleScreen/BattleMessage/BattleMessag
 
 let firstPokemonMoves = null;
 let secondPokemonMoves = null;
+let firstEnemyMoves = null;
+let secondEnemyMoves = null;
 
 const Battle = () => {
   const user = useSelector((state) => state.user.user);
@@ -24,7 +26,14 @@ const Battle = () => {
   useEffect(() => {
     firstPokemonMoves = pickRandomFourMoves(user.firstChoice.moves);
     secondPokemonMoves = pickRandomFourMoves(user.secondChoice.moves);
-  }, [user.firstChoice.moves, user.secondChoice.moves]);
+    firstEnemyMoves = pickRandomFourMoves(enemy.firstEnemy.moves);
+    secondEnemyMoves = pickRandomFourMoves(enemy.secondEnemy.moves);
+  }, [
+    user.firstChoice.moves,
+    user.secondChoice.moves,
+    enemy.firstEnemy.moves,
+    enemy.secondEnemy.moves,
+  ]);
   // =====================================================================
 
   // ===== Event is executed at BattleFight.js and the result is reflected at BattleDisplay =====
@@ -37,6 +46,17 @@ const Battle = () => {
   const damageHandler = (damage) => {
     if (!isSecondPokemon) setFirstEnemyHp((firstEnemyHp -= damage));
     if (isSecondPokemon) setSecondEnemyHp((secondEnemyHp -= damage));
+  };
+
+  let [firstPokemonHp, setFirstPokemonHp] = useState(
+    user.firstChoice.stats[0].base_stat
+  );
+  let [secondPokemonHp, setSecondPokemonHp] = useState(
+    user.secondChoice.stats[0].base_stat
+  );
+  const damageHandlerE = (damage) => {
+    if (!isFirstEnemyDead) setFirstPokemonHp((firstPokemonHp -= damage));
+    if (isFirstEnemyDead) setSecondPokemonHp((secondPokemonHp -= damage));
   };
   // =============================================================================================
 
@@ -72,14 +92,20 @@ const Battle = () => {
         isFirstEnemyDead={isFirstEnemyDead}
         firstEnemyHitPoint={firstEnemyHp}
         secondEnemyHitPoint={secondEnemyHp}
+        firstPokemonHitPoint={firstPokemonHp}
+        secondPokemonHitPoint={secondPokemonHp}
       />
       {command === "home" && <BattleHome page="home" />}
       {command === "fight" && (
         <BattleFight
           isSecondPokemon={isSecondPokemon}
+          isFirstEnemyDead={isFirstEnemyDead} // NEW
           firstPokemonMoves={firstPokemonMoves}
           secondPokemonMoves={secondPokemonMoves}
+          firstEnemyMoves={firstEnemyMoves}
+          secondEnemyMoves={secondEnemyMoves}
           damageHandler={damageHandler}
+          damageHandlerE={damageHandlerE}
           setMoveMessage={setMoveMessage}
           setMoveUsed={setMoveUsed}
         />
