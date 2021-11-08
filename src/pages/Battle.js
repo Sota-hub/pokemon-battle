@@ -19,8 +19,8 @@ const Battle = () => {
   const user = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
   const [command, setCommand] = useState("home");
-  const [isSecondPokemon /*setIsSecondPokemon*/] = useState(false);
-  const [isFirstEnemyDead /*setIsFirstEnemyDead*/] = useState(false);
+  const [isSecondPokemon, setIsSecondPokemon] = useState(false);
+  const [isFirstEnemyDead, setIsFirstEnemyDead] = useState(false);
 
   // ======== Define pokemon moves here to prevent re-render bug ========
   useEffect(() => {
@@ -67,6 +67,7 @@ const Battle = () => {
   // ===========================================================================================================
 
   // === Switch the command bars ===
+  // TODO: get rid of functions for less code in refactor
   const fightCommand = () => {
     setCommand("fight");
   };
@@ -104,10 +105,16 @@ const Battle = () => {
           secondPokemonMoves={secondPokemonMoves}
           firstEnemyMoves={firstEnemyMoves}
           secondEnemyMoves={secondEnemyMoves}
+          firstEnemyHitPoint={firstEnemyHp}
+          secondEnemyHitPoint={secondEnemyHp}
+          firstPokemonHitPoint={firstPokemonHp}
+          secondPokemonHitPoint={secondPokemonHp}
           damageHandler={damageHandler}
           damageHandlerE={damageHandlerE}
           setMoveMessage={setMoveMessage}
           setMoveUsed={setMoveUsed}
+          setIsSecondPokemon={setIsSecondPokemon}
+          setIsFirstEnemyDead={setIsFirstEnemyDead}
         />
       )}
       {command === "change" && <BattleChange />}

@@ -11,10 +11,16 @@ const BattleFight = ({
   secondPokemonMoves,
   firstEnemyMoves,
   secondEnemyMoves,
+  firstEnemyHitPoint,
+  secondEnemyHitPoint,
+  firstPokemonHitPoint,
+  secondPokemonHitPoint,
   damageHandler,
   damageHandlerE,
   setMoveMessage,
   setMoveUsed,
+  setIsSecondPokemon,
+  setIsFirstEnemyDead,
 }) => {
   const user = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
@@ -76,14 +82,21 @@ const BattleFight = ({
 
     if (userSpeed > enemySpeed) {
       userMoving();
-      // if( enemyPokemonHp =< 0 ) return
+      if (isFirstEnemyDead ? secondEnemyHitPoint : firstEnemyHitPoint <= 0) {
+        // TODO: fix the bug they doesn't die
+        // setIsFirstEnemyDead(true);
+        return;
+      }
       setTimeout(() => {
         enemyMoving();
       }, 3000);
     }
     if (userSpeed < enemySpeed) {
       enemyMoving();
-      // if( userPokemonHp =< 0 ) return
+      if (isSecondPokemon ? secondPokemonHitPoint : firstPokemonHitPoint <= 0) {
+        // setIsSecondPokemon(true);
+        return;
+      }
       setTimeout(() => {
         userMoving();
       }, 3000);
