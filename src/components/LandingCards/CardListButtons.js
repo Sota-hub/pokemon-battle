@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { randomNumber } from "../../helpers/customFunctions";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
 import Card from "./Card";
+import useSound from "use-sound";
+import select from "../../sounds/select2.mp3";
 
 // Styled components
 const CardListContainer = styled.div`
@@ -43,6 +45,7 @@ const singleCard = (dataItem, idx, choice) => (
 );
 
 const CardListButtons = ({ choice, setChoice }) => {
+  const [play] = useSound(select);
   // fetch with useSWR
   const { data, isError, isLoading } = useFetchPokemon(
     randomNumbers.map((num) => `pokemon/${num}`)
@@ -57,7 +60,12 @@ const CardListButtons = ({ choice, setChoice }) => {
 
   // When fetching is Success
   return (
-    <CardListContainer onChange={(e) => setChoice(e.target.value)}>
+    <CardListContainer
+      onChange={(e) => setChoice(e.target.value)}
+      onClick={() => {
+        play();
+      }}
+    >
       {choice === "firstChoice" &&
         formerData?.map((dataItem, idx) => singleCard(dataItem, idx, choice))}
       {choice === "secondChoice" &&

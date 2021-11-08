@@ -5,6 +5,7 @@ import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
 import Battle from "./pages/Battle";
 import CutIn from "./components/CutIn/CutIn";
+import Change from "./components/change/change";
 
 function App() {
   return (
@@ -25,11 +26,17 @@ function App() {
       <Route path="/sohta" exact>
         <SohtaTestPage />
       </Route>
+
+      <Route path="/change" exact>
+        <Change />
+        </Route>
+
       <Route path="/ready" exact>
         <Ready />
       </Route>
       <Route path="/battle" exact>
         <Battle />
+
       </Route>
     </Switch>
   );
