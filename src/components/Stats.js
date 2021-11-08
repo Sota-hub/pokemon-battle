@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Stats = ({ dataItem }) => {
-  console.log(dataItem);
   return (
     <Outer>
       <StatsContainer>
@@ -10,8 +9,10 @@ const Stats = ({ dataItem }) => {
           <OddStatValue>{dataItem.id}</OddStatValue>
         </StatContainer>
         <TypeContainer>
-          {dataItem.types.map((type) => (
-            <TypeContent>{type.type.name}</TypeContent>
+          {dataItem.types.map((type, idx) => (
+            <TypeContent key={`type-content-${idx}`}>
+              {type.type.name}
+            </TypeContent>
           ))}
         </TypeContainer>
         <StatContainer>

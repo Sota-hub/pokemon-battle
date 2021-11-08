@@ -39,4 +39,32 @@ export const CountDown = ({ time }) => {
     </div>
   );
 };
-// export const PopUp = () => {};
+
+// pick four moves randomly for fight command
+export const pickRandomFourMoves = (array) => {
+  // Prevent to mutate the state
+  let copiedArray = [...array];
+  let movesArray = [];
+
+  while (movesArray.length < 4) {
+    if (copiedArray.length < 4) {
+      movesArray = copiedArray;
+      break;
+    }
+
+    const randomMove = Math.floor(Math.random() * copiedArray.length);
+    movesArray.push(copiedArray[randomMove]);
+    copiedArray.splice(randomMove, 1);
+  }
+
+  return movesArray;
+};
+
+// "power"   = const moveData = +useFetchMove(moves[x].move.url.slice(-3 or -2, -1) -> moveData.power
+// "attack"  = user.xxxChoice.stats[1].base_stat / enemy.xxxEnemy.stats[1].base_stat
+// "defence" = user.xxxChoice.stats[2].base_stat / enemy.xxxEnemy.stats[2].base_stat
+export const calcDamage = (power, attack, defence) => {
+  const formula1 = (2 * Math.floor((power * attack) / defence)) / 50 + 2;
+  const formula2 = (Math.floor(Math.random() * (101 - 85)) + 85) / 25;
+  return Math.floor(formula1 * formula2);
+};
