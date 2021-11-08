@@ -18,7 +18,7 @@ const CutIn = () => {
       setIsLoaded(true);
     }, 0);
     setTimeout(() => {
-      history.replace("battle");
+      history.replace("/change");
     }, 3000);
   });
 
