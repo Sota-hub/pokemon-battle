@@ -8,6 +8,8 @@ import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
 import ReactAudioPlayer from "react-audio-player";
 import title from "../sounds/Title.mp3";
+import { pickRandomFourMoves } from "../helpers/customFunctions";
+import { fetchMove } from "../helpers/customFunctions";
 
 const Landing = () => {
   const [play, { stop }] = useSound(pokemon);
@@ -24,7 +26,7 @@ const Landing = () => {
     setIsTouched(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsTouched(true);
 
@@ -34,13 +36,81 @@ const Landing = () => {
 
     setUserName("");
     setIsTouched(false);
+
+    const firstPokemon = JSON.parse(firstChoice);
+    const secondPokemon = JSON.parse(secondChoice);
+
     dispatch(
       userActions.createUser({
         userName,
-        firstChoice: JSON.parse(firstChoice),
-        secondChoice: JSON.parse(secondChoice),
+        firstChoice: firstPokemon,
+        secondChoice: secondPokemon,
       })
     );
+
+    // ============== Get first and second pokemon's moves information ==============
+    const firstUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
+    const secondUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
+
+    const conditions = (url) => {
+      if (url.length === 33) return +url.slice(-2, -1);
+      if (url.length === 34) return +url.slice(-3, -1);
+      if (url.length === 35) return +url.slice(-4, -1);
+    };
+
+    const returnData = (data) => {
+      return {
+        name: data.name,
+        power: data.power,
+        accuracy: data.accuracy,
+        pp: data.pp,
+      };
+    };
+
+    const firstIds = firstUserPokemonMoves.map((move) => {
+      const url = move.move.url;
+      return conditions(url);
+    });
+
+    const secondIds = secondUserPokemonMoves.map((move) => {
+      const url = move.move.url;
+      return conditions(url);
+    });
+
+    const firstData = await fetchMove(firstIds);
+    const secondData = await fetchMove(secondIds);
+
+    const firstMoves = firstData.map((data) => {
+      return returnData(data);
+    });
+
+    const secondMoves = secondData.map((data) => {
+      return returnData(data);
+    });
+    // ==============================================================================
+
+    dispatch(
+      userActions.storeUserFirstPokemonInfo({
+        name: firstPokemon.name,
+        moves: [...firstMoves],
+        hp: firstPokemon.stats[0].base_stat,
+        attack: firstPokemon.stats[1].base_stat,
+        defence: firstPokemon.stats[2].base_stat,
+        speed: firstPokemon.stats[5].base_stat,
+      })
+    );
+
+    dispatch(
+      userActions.storeUserSecondPokemonInfo({
+        name: secondPokemon.name,
+        moves: [...secondMoves],
+        hp: secondPokemon.stats[0].base_stat,
+        attack: secondPokemon.stats[1].base_stat,
+        defence: secondPokemon.stats[2].base_stat,
+        speed: secondPokemon.stats[5].base_stat,
+      })
+    );
+
     history.replace("/ready");
   };
 

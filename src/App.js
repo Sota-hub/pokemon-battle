@@ -1,6 +1,5 @@
 import { Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
-import SotaTestPage from "./pages/SotaTestPage";
 import SohtaTestPage from "./pages/SohtaTestPage";
 import Ready from "./pages/Ready";
 import Battle from "./pages/Battle";
@@ -19,9 +18,6 @@ function App() {
         <Ready />
       </Route>
       {/* Test Pages */}
-      <Route path="/sota" exact>
-        <SotaTestPage />
-      </Route>
       <Route path="/sohta" exact>
         <SohtaTestPage />
       </Route>

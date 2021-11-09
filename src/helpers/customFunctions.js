@@ -68,3 +68,18 @@ export const calcDamage = (power, attack, defence) => {
   const formula2 = (Math.floor(Math.random() * (101 - 85)) + 85) / 25;
   return Math.floor(formula1 * formula2);
 };
+
+// useFetchMove is super inconvenient !!!!!!!!!!!!!
+export const fetchMove = async (urls) => {
+  const getData = async (url) => {
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/move/${url}`);
+      if (!response.ok) throw new Error("failed to load");
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  return await Promise.all(urls.map((url) => getData(url)));
+};

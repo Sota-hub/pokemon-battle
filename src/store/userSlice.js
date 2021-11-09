@@ -6,6 +6,22 @@ const initialUserState = {
     firstChoice: null,
     secondChoice: null,
   },
+  userFirstPokemon: {
+    name: "",
+    moves: [],
+    hp: null,
+    attack: null,
+    defence: null,
+    speed: null,
+  },
+  userSecondPokemon: {
+    name: "",
+    moves: [],
+    hp: null,
+    attack: null,
+    defence: null,
+    speed: null,
+  },
 };
 
 const userSlice = createSlice({
@@ -14,6 +30,12 @@ const userSlice = createSlice({
   reducers: {
     createUser(state, action) {
       state.user = action.payload;
+    },
+    storeUserFirstPokemonInfo(state, action) {
+      state.userFirstPokemon = action.payload;
+    },
+    storeUserSecondPokemonInfo(state, action) {
+      state.userSecondPokemon = action.payload;
     },
   },
 });
