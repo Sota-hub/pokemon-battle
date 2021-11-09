@@ -94,7 +94,10 @@ const Ready = () => {
       enemyActions.storeEnemyFirstPokemonInfo({
         name: firstEnemy.name,
         moves: [...firstMoves],
-        hp: firstEnemy.stats[0].base_stat,
+        hp: {
+          current: firstEnemy.stats[0].base_stat,
+          max: firstEnemy.stats[0].base_stat,
+        },
         attack: firstEnemy.stats[1].base_stat,
         defence: firstEnemy.stats[2].base_stat,
         speed: firstEnemy.stats[5].base_stat,
@@ -105,7 +108,10 @@ const Ready = () => {
       enemyActions.storeEnemySecondPokemonInfo({
         name: secondEnemy.name,
         moves: [...secondMoves],
-        hp: secondEnemy.stats[0].base_stat,
+        hp: {
+          current: secondEnemy.stats[0].base_stat,
+          max: secondEnemy.stats[0].base_stat,
+        },
         attack: secondEnemy.stats[1].base_stat,
         defence: secondEnemy.stats[2].base_stat,
         speed: secondEnemy.stats[5].base_stat,

@@ -8,7 +8,10 @@ const initialEnemyState = {
   enemyFirstPokemon: {
     name: "",
     moves: [],
-    hp: null,
+    hp: {
+      current: null,
+      max: null,
+    },
     attack: null,
     defence: null,
     speed: null,
@@ -16,7 +19,10 @@ const initialEnemyState = {
   enemySecondPokemon: {
     name: "",
     moves: [],
-    hp: null,
+    hp: {
+      current: null,
+      max: null,
+    },
     attack: null,
     defence: null,
     speed: null,

@@ -9,7 +9,10 @@ const initialUserState = {
   userFirstPokemon: {
     name: "",
     moves: [],
-    hp: null,
+    hp: {
+      current: null,
+      max: null,
+    },
     attack: null,
     defence: null,
     speed: null,
@@ -17,7 +20,10 @@ const initialUserState = {
   userSecondPokemon: {
     name: "",
     moves: [],
-    hp: null,
+    hp: {
+      current: null,
+      max: null,
+    },
     attack: null,
     defence: null,
     speed: null,
