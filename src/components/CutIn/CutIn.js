@@ -22,7 +22,7 @@ const CutIn = () => {
     setTimeout(() => {
       history.replace("battle");
     }, 3000);
-  });
+  }, [history]);
 
   return (
     <div className={classes.container}>

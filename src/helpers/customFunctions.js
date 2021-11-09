@@ -83,3 +83,18 @@ export const fetchMove = async (urls) => {
   };
   return await Promise.all(urls.map((url) => getData(url)));
 };
+
+export const conditions = (url) => {
+  if (url.length === 33) return +url.slice(-2, -1);
+  if (url.length === 34) return +url.slice(-3, -1);
+  if (url.length === 35) return +url.slice(-4, -1);
+};
+
+export const returnData = (data) => {
+  return {
+    name: data.name,
+    power: data.power,
+    accuracy: data.accuracy,
+    pp: data.pp,
+  };
+};

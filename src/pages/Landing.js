@@ -8,8 +8,12 @@ import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
 import ReactAudioPlayer from "react-audio-player";
 import title from "../sounds/Title.mp3";
-import { pickRandomFourMoves } from "../helpers/customFunctions";
-import { fetchMove } from "../helpers/customFunctions";
+import {
+  pickRandomFourMoves,
+  fetchMove,
+  conditions,
+  returnData,
+} from "../helpers/customFunctions";
 
 const Landing = () => {
   const [play, { stop }] = useSound(pokemon);
@@ -51,21 +55,6 @@ const Landing = () => {
     // ============== Get first and second pokemon's moves information ==============
     const firstUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
     const secondUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
-
-    const conditions = (url) => {
-      if (url.length === 33) return +url.slice(-2, -1);
-      if (url.length === 34) return +url.slice(-3, -1);
-      if (url.length === 35) return +url.slice(-4, -1);
-    };
-
-    const returnData = (data) => {
-      return {
-        name: data.name,
-        power: data.power,
-        accuracy: data.accuracy,
-        pp: data.pp,
-      };
-    };
 
     const firstIds = firstUserPokemonMoves.map((move) => {
       const url = move.move.url;
