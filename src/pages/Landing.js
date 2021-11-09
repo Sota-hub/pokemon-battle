@@ -8,12 +8,7 @@ import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
 import ReactAudioPlayer from "react-audio-player";
 import title from "../sounds/Title.mp3";
-import {
-  pickRandomFourMoves,
-  fetchMove,
-  conditions,
-  returnData,
-} from "../helpers/customFunctions";
+import { getPokemonMovesInfo } from "../helpers/customFunctions";
 
 const Landing = () => {
   const [play, { stop }] = useSound(pokemon);
@@ -52,31 +47,8 @@ const Landing = () => {
       })
     );
 
-    // ============== Get first and second pokemon's moves information ==============
-    const firstUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
-    const secondUserPokemonMoves = pickRandomFourMoves(firstPokemon.moves);
-
-    const firstIds = firstUserPokemonMoves.map((move) => {
-      const url = move.move.url;
-      return conditions(url);
-    });
-
-    const secondIds = secondUserPokemonMoves.map((move) => {
-      const url = move.move.url;
-      return conditions(url);
-    });
-
-    const firstData = await fetchMove(firstIds);
-    const secondData = await fetchMove(secondIds);
-
-    const firstMoves = firstData.map((data) => {
-      return returnData(data);
-    });
-
-    const secondMoves = secondData.map((data) => {
-      return returnData(data);
-    });
-    // ==============================================================================
+    const firstMoves = await getPokemonMovesInfo(firstPokemon.moves);
+    const secondMoves = await getPokemonMovesInfo(secondPokemon.moves);
 
     dispatch(
       userActions.storeUserFirstPokemonInfo({

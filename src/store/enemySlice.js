@@ -5,6 +5,22 @@ const initialEnemyState = {
     firstEnemy: null,
     secondEnemy: null,
   },
+  enemyFirstPokemon: {
+    name: "",
+    moves: [],
+    hp: null,
+    attack: null,
+    defence: null,
+    speed: null,
+  },
+  enemySecondPokemon: {
+    name: "",
+    moves: [],
+    hp: null,
+    attack: null,
+    defence: null,
+    speed: null,
+  },
 };
 
 const enemySlice = createSlice({
@@ -13,6 +29,12 @@ const enemySlice = createSlice({
   reducers: {
     createEnemy(state, action) {
       state.enemy = action.payload;
+    },
+    storeEnemyFirstPokemonInfo(state, action) {
+      state.enemyFirstPokemon = action.payload;
+    },
+    storeEnemySecondPokemonInfo(state, action) {
+      state.enemySecondPokemon = action.payload;
     },
   },
 });

@@ -13,8 +13,12 @@ const CutIn = () => {
   // TEST START
   const firstPoke = useSelector((state) => state.user.userFirstPokemon);
   const secondPoke = useSelector((state) => state.user.userSecondPokemon);
-  console.log("first", firstPoke);
-  console.log("second", secondPoke);
+  const firstEne = useSelector((state) => state.enemy.enemyFirstPokemon);
+  const secondEne = useSelector((state) => state.enemy.enemySecondPokemon);
+  console.log("firstPoke", firstPoke);
+  console.log("secondPoke", secondPoke);
+  console.log("firstEne", firstEne);
+  console.log("secondEne", secondEne);
   // TEST END
 
   useEffect(() => {

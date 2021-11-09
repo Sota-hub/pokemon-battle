@@ -69,8 +69,8 @@ export const calcDamage = (power, attack, defence) => {
   return Math.floor(formula1 * formula2);
 };
 
-// useFetchMove is super inconvenient !!!!!!!!!!!!!
-export const fetchMove = async (urls) => {
+// ==================== Functions for getPokemonMovesInfo ====================
+const fetchMove = async (urls) => {
   const getData = async (url) => {
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/move/${url}`);
@@ -84,17 +84,35 @@ export const fetchMove = async (urls) => {
   return await Promise.all(urls.map((url) => getData(url)));
 };
 
-export const conditions = (url) => {
+const conditions = (url) => {
   if (url.length === 33) return +url.slice(-2, -1);
   if (url.length === 34) return +url.slice(-3, -1);
   if (url.length === 35) return +url.slice(-4, -1);
 };
 
-export const returnData = (data) => {
+const necessaryData = (data) => {
   return {
     name: data.name,
     power: data.power,
     accuracy: data.accuracy,
     pp: data.pp,
   };
+};
+// ===========================================================================
+
+export const getPokemonMovesInfo = async (moves) => {
+  const pokemonMoves = pickRandomFourMoves(moves);
+
+  const ids = pokemonMoves.map((move) => {
+    const url = move.move.url;
+    return conditions(url);
+  });
+
+  const Data = await fetchMove(ids);
+
+  const necessaryMovesInfo = Data.map((data) => {
+    return necessaryData(data);
+  });
+
+  return necessaryMovesInfo;
 };
