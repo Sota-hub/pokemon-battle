@@ -7,6 +7,7 @@ import Card from "../components/LandingCards/Card";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { enemyActions } from "../store/enemySlice";
+import { getPokemonMovesInfo } from "../helpers/customFunctions";
 
 const randomNumbers = randomNumber(2);
 
@@ -68,7 +69,6 @@ const Timer = styled(Header.withComponent("div"))`
 
 const Ready = () => {
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.user.user);
   const { data, isError, isLoading } = useFetchPokemon(
     randomNumbers.map((num) => `pokemon/${num}`)
@@ -76,12 +76,49 @@ const Ready = () => {
   if (isError) return <First>failed to load</First>;
   if (isLoading) return <First>loading...</First>;
 
-  dispatch(
-    enemyActions.createEnemy({
-      firstEnemy: data[0],
-      secondEnemy: data[1],
-    })
-  );
+  const firstEnemy = data[0];
+  const secondEnemy = data[1];
+
+  const waitMovesInfo = async () => {
+    dispatch(
+      enemyActions.createEnemy({
+        firstEnemy: firstEnemy,
+        secondEnemy: secondEnemy,
+      })
+    );
+
+    const firstMoves = await getPokemonMovesInfo(firstEnemy.moves);
+    const secondMoves = await getPokemonMovesInfo(secondEnemy.moves);
+
+    dispatch(
+      enemyActions.storeEnemyFirstPokemonInfo({
+        name: firstEnemy.name,
+        moves: [...firstMoves],
+        hp: {
+          current: firstEnemy.stats[0].base_stat,
+          max: firstEnemy.stats[0].base_stat,
+        },
+        attack: firstEnemy.stats[1].base_stat,
+        defence: firstEnemy.stats[2].base_stat,
+        speed: firstEnemy.stats[5].base_stat,
+      })
+    );
+
+    dispatch(
+      enemyActions.storeEnemySecondPokemonInfo({
+        name: secondEnemy.name,
+        moves: [...secondMoves],
+        hp: {
+          current: secondEnemy.stats[0].base_stat,
+          max: secondEnemy.stats[0].base_stat,
+        },
+        attack: secondEnemy.stats[1].base_stat,
+        defence: secondEnemy.stats[2].base_stat,
+        speed: secondEnemy.stats[5].base_stat,
+      })
+    );
+  };
+  waitMovesInfo();
 
   const time = { seconds: 3 };
   return (

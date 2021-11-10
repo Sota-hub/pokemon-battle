@@ -8,6 +8,7 @@ import useSound from "use-sound";
 import pokemon from "../sounds/Pokemon.mp3";
 import ReactAudioPlayer from "react-audio-player";
 import title from "../sounds/Title.mp3";
+import { getPokemonMovesInfo } from "../helpers/customFunctions";
 
 const Landing = () => {
   const [play, { stop }] = useSound(pokemon);
@@ -24,7 +25,7 @@ const Landing = () => {
     setIsTouched(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsTouched(true);
 
@@ -34,13 +35,49 @@ const Landing = () => {
 
     setUserName("");
     setIsTouched(false);
+
+    const firstPokemon = JSON.parse(firstChoice);
+    const secondPokemon = JSON.parse(secondChoice);
+
     dispatch(
       userActions.createUser({
         userName,
-        firstChoice: JSON.parse(firstChoice),
-        secondChoice: JSON.parse(secondChoice),
+        firstChoice: firstPokemon,
+        secondChoice: secondPokemon,
       })
     );
+
+    const firstMoves = await getPokemonMovesInfo(firstPokemon.moves);
+    const secondMoves = await getPokemonMovesInfo(secondPokemon.moves);
+
+    dispatch(
+      userActions.storeUserFirstPokemonInfo({
+        name: firstPokemon.name,
+        moves: [...firstMoves],
+        hp: {
+          current: firstPokemon.stats[0].base_stat,
+          max: firstPokemon.stats[0].base_stat,
+        },
+        attack: firstPokemon.stats[1].base_stat,
+        defence: firstPokemon.stats[2].base_stat,
+        speed: firstPokemon.stats[5].base_stat,
+      })
+    );
+
+    dispatch(
+      userActions.storeUserSecondPokemonInfo({
+        name: secondPokemon.name,
+        moves: [...secondMoves],
+        hp: {
+          current: secondPokemon.stats[0].base_stat,
+          max: secondPokemon.stats[0].base_stat,
+        },
+        attack: secondPokemon.stats[1].base_stat,
+        defence: secondPokemon.stats[2].base_stat,
+        speed: secondPokemon.stats[5].base_stat,
+      })
+    );
+
     history.replace("/ready");
   };
 
