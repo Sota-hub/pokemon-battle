@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialEnemyState = {
+  isSecondEnemy: false,
   enemy: {
     firstEnemy: null,
     secondEnemy: null,
@@ -41,6 +42,12 @@ const enemySlice = createSlice({
     },
     storeEnemySecondPokemonInfo(state, action) {
       state.enemySecondPokemon = action.payload;
+    },
+    damageEnemyFirstPokemon(state, action) {
+      state.enemyFirstPokemon.hp.current -= action.payload;
+    },
+    damageEnemySecondPokemon(state, action) {
+      state.enemySecondPokemon.hp.current -= action.payload;
     },
   },
 });

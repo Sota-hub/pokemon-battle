@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialUserState = {
+  isSecondPokemon: false,
   user: {
     userName: "",
     firstChoice: null,
@@ -42,6 +43,12 @@ const userSlice = createSlice({
     },
     storeUserSecondPokemonInfo(state, action) {
       state.userSecondPokemon = action.payload;
+    },
+    damageUserFirstPokemon(state, action) {
+      state.userFirstPokemon.hp.current -= action.payload;
+    },
+    damageUserSecondPokemon(state, action) {
+      state.userSecondPokemon.hp.current -= action.payload;
     },
   },
 });

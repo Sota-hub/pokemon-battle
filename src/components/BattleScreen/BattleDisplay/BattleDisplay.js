@@ -1,71 +1,70 @@
 import { useSelector } from "react-redux";
 import classes from "./BattleDisplay.module.scss";
 
-const BattleDisplay = ({
-  onFight,
-  onChange,
-  onItem,
-  isSecondPokemon,
-  isFirstEnemyDead,
-  firstEnemyHitPoint,
-  secondEnemyHitPoint,
-  firstPokemonHitPoint,
-  secondPokemonHitPoint,
-}) => {
+const BattleDisplay = ({ onFight, onChange, onItem }) => {
+  const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
+  const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
   const user = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
+  const userFirstPokemonHp = useSelector(
+    (state) => state.user.userFirstPokemon.hp
+  );
+  const userSecondPokemonHp = useSelector(
+    (state) => state.user.userSecondPokemon.hp
+  );
+  const enemyFirstPokemonHp = useSelector(
+    (state) => state.enemy.enemyFirstPokemon.hp
+  );
+  const enemySecondPokemonHp = useSelector(
+    (state) => state.enemy.enemySecondPokemon.hp
+  );
 
-  const firstUserName = user.firstChoice.forms[0].name;
-  const secondUserName = user.secondChoice.forms[0].name;
-  const firstEnemyName = enemy.firstEnemy.forms[0].name;
-  const secondEnemyName = enemy.secondEnemy.forms[0].name;
+  const fightingUserPokemon = isSecondPokemon
+    ? user.secondChoice
+    : user.firstChoice;
+
+  const fightingEnemyPokemon = isSecondEnemy
+    ? enemy.secondEnemy
+    : enemy.firstEnemy;
+
+  const fightingUserPokemonHp = isSecondPokemon
+    ? userSecondPokemonHp
+    : userFirstPokemonHp;
+
+  const fightingEnemyPokemonHp = isSecondEnemy
+    ? enemySecondPokemonHp
+    : enemyFirstPokemonHp;
 
   return (
     <div className={classes.display}>
       <div className={classes.enemy_hp}>
-        <p>{isFirstEnemyDead ? secondEnemyName : firstEnemyName}</p>
+        <p>{fightingEnemyPokemon.name}</p>
         <progress
           className={classes.hp_bar}
           id="hp"
-          value={isFirstEnemyDead ? secondEnemyHitPoint : firstEnemyHitPoint}
-          max={
-            isFirstEnemyDead
-              ? enemy.secondEnemy.stats[0].base_stat
-              : enemy.firstEnemy.stats[0].base_stat
-          }
+          value={fightingEnemyPokemonHp.current}
+          max={fightingEnemyPokemonHp.max}
         ></progress>
       </div>
       <div className={classes.user_image}>
         <img
-          src={
-            isSecondPokemon
-              ? user.secondChoice.sprites.back_default
-              : user.firstChoice.sprites.back_default
-          }
-          alt={isSecondPokemon ? secondUserName : firstUserName}
+          src={fightingUserPokemon.sprites.back_default}
+          alt={fightingUserPokemon.name}
         />
       </div>
       <div className={classes.user_hp}>
-        <p>{isSecondPokemon ? secondUserName : firstUserName}</p>
+        <p>{fightingUserPokemon.name}</p>
         <progress
           className={classes.hp_bar}
           id="hp"
-          value={isSecondPokemon ? secondPokemonHitPoint : firstPokemonHitPoint}
-          max={
-            isSecondPokemon
-              ? user.secondChoice.stats[0].base_stat
-              : user.firstChoice.stats[0].base_stat
-          }
+          value={fightingUserPokemonHp.current}
+          max={fightingUserPokemonHp.max}
         ></progress>
       </div>
       <div className={classes.enemy_image}>
         <img
-          src={
-            isFirstEnemyDead
-              ? enemy.secondEnemy.sprites.front_default
-              : enemy.firstEnemy.sprites.front_default
-          }
-          alt={isFirstEnemyDead ? secondEnemyName : firstEnemyName}
+          src={fightingEnemyPokemon.sprites.front_default}
+          alt={fightingEnemyPokemon.name}
         />
       </div>
       <ul className={classes.link_container}>
