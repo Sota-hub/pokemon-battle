@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Stats = ({ dataItem }) => {
-  console.log(dataItem);
   return (
     <Outer>
       <StatsContainer>
