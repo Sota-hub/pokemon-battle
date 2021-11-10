@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import classes from "./BattleDisplay.module.scss";
 
-const BattleDisplay = ({ onFight, onChange, onItem }) => {
+const BattleDisplay = ({ setCommand }) => {
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
   const user = useSelector((state) => state.user.user);
@@ -68,13 +68,28 @@ const BattleDisplay = ({ onFight, onChange, onItem }) => {
         />
       </div>
       <ul className={classes.link_container}>
-        <li className={classes.link_style} onClick={onFight}>
+        <li
+          className={classes.link_style}
+          onClick={() => {
+            setCommand("fight");
+          }}
+        >
           Fight
         </li>
-        <li className={classes.link_style} onClick={onChange}>
+        <li
+          className={classes.link_style}
+          onClick={() => {
+            setCommand("change");
+          }}
+        >
           Change
         </li>
-        <li className={classes.link_style} onClick={onItem}>
+        <li
+          className={classes.link_style}
+          onClick={() => {
+            setCommand("item");
+          }}
+        >
           Item
         </li>
       </ul>

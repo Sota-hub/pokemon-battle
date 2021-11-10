@@ -16,30 +16,9 @@ const Battle = () => {
   const [message, setMessage] = useState(initialMessage);
   const [command, setCommand] = useState("home");
 
-  // === Switch the command bars ===
-  // TODO: get rid of functions for less code in refactor
-  const fightCommand = () => {
-    setCommand("fight");
-  };
-  const changeCommand = () => {
-    setCommand("change");
-  };
-  const itemCommand = () => {
-    setCommand("item");
-  };
-  // ================================
-
-  // const togglePokemon = () => {
-  //   setIsSecondPokemon(!isSecondPokemon);
-  // };
-
   return (
     <GridContainer>
-      <BattleDisplay
-        onFight={fightCommand}
-        onChange={changeCommand}
-        onItem={itemCommand}
-      />
+      <BattleDisplay setCommand={setCommand} />
       {command === "home" && <BattleHome page="home" />}
       {command === "fight" && <BattleFight setMessage={setMessage} />}
       {command === "change" && <BattleChange />}
