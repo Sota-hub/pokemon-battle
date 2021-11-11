@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import useSound from "use-sound";
+import battle from "../../sounds/Battle.mp3";
 
 import classes from "./CutIn.module.css";
 
 const CutIn = () => {
+  const [play] = useSound(battle);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const history = useHistory();
@@ -17,8 +20,11 @@ const CutIn = () => {
       setIsLoaded(true);
     }, 0);
     setTimeout(() => {
-      history.replace("/change");
-    }, 3000);
+      history.replace("/battle");
+    }, 4000);
+    setTimeout(() => {
+      play();
+    }, 3500);
   });
 
   return (
