@@ -21,6 +21,7 @@ function App() {
       <Route path="/sohta" exact>
         <SohtaTestPage />
       </Route>
+
       <Route path="/ready" exact>
         <Ready />
       </Route>

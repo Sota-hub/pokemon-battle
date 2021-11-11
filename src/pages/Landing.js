@@ -96,6 +96,7 @@ const Landing = () => {
         autoPlay
         controls
         volume={0.3}
+        loop
       />
       <HeaderClass>Welcome to Pokemon battle</HeaderClass>
       <LandingForm onSubmit={handleSubmit}>
