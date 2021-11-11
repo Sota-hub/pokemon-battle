@@ -34,6 +34,9 @@ const enemySlice = createSlice({
     damageEnemySecondPokemon(state, action) {
       state.pokemon[1].hp.current -= action.payload;
     },
+    setIsSecondEnemy(state) {
+      state.isSecondEnemy = true;
+    },
   },
 });
 

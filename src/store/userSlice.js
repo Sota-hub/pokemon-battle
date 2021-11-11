@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUserState = {
   isSecondPokemon: false,
+  isLastPokemon: false,
   pokemon: [],
 };
 
@@ -33,6 +34,12 @@ const userSlice = createSlice({
     },
     damageUserSecondPokemon(state, action) {
       state.pokemon[1].hp.current -= action.payload;
+    },
+    toggleIsSecondPokemon(state) {
+      state.isSecondPokemon = !state.isSecondPokemon;
+    },
+    setIsLastPokemon(state) {
+      state.isLastPokemon = true;
     },
   },
 });
