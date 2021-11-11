@@ -7,8 +7,6 @@ import classes from "./CutIn.module.css";
 const CutIn = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
-  const user = useSelector((state) => state.user.user);
-  const enemy = useSelector((state) => state.enemy.pokemon);
 
   // TEST START
   const firstPokemon = useSelector((state) => state.user.pokemon[0]);

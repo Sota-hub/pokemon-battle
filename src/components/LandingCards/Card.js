@@ -1,10 +1,9 @@
 import { useState } from "react";
 
 import styled from "styled-components";
-import Stats from "../Stats";
 
 const Card = ({ pokemonName, imageSrc }) => {
-  const [isShown, setIsShown] = useState(false);
+  // const [isShown, setIsShown] = useState(false);
 
   const mouseHover = () => {
     setIsShown(true);
