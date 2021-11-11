@@ -10,9 +10,9 @@ import BattleItem from "../components/BattleScreen/BattleItem/BattleItem";
 import BattleMessage from "../components/BattleScreen/BattleMessage/BattleMessage";
 
 const Battle = () => {
-  const user = useSelector((state) => state.user.user);
-  const enemy = useSelector((state) => state.enemy.enemy);
-  const initialMessage = `AI sent out ${enemy.firstEnemy.name}! Go ${user.firstChoice.name}!`;
+  const firstPokemonName = useSelector((state) => state.user.pokemon[0].name);
+  const firstEnemyName = useSelector((state) => state.enemy.pokemon[0].name);
+  const initialMessage = `AI sent out ${firstEnemyName}! Go ${firstPokemonName}!`;
   const [message, setMessage] = useState(initialMessage);
   const [command, setCommand] = useState("home");
 
