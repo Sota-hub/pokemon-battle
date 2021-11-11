@@ -60,11 +60,56 @@ export const pickRandomFourMoves = (array) => {
   return movesArray;
 };
 
-// "power"   = const moveData = +useFetchMove(moves[x].move.url.slice(-3 or -2, -1) -> moveData.power
-// "attack"  = user.xxxChoice.stats[1].base_stat / enemy.xxxEnemy.stats[1].base_stat
-// "defence" = user.xxxChoice.stats[2].base_stat / enemy.xxxEnemy.stats[2].base_stat
 export const calcDamage = (power, attack, defence) => {
   const formula1 = (2 * Math.floor((power * attack) / defence)) / 50 + 2;
   const formula2 = (Math.floor(Math.random() * (101 - 85)) + 85) / 25;
   return Math.floor(formula1 * formula2);
+};
+
+// ==================== Functions for getPokemonMovesInfo ====================
+const fetchMove = async (urls) => {
+  const getData = async (url) => {
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/move/${url}`);
+      if (!response.ok) throw new Error("failed to load");
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  return await Promise.all(urls.map((url) => getData(url)));
+};
+
+const conditions = (url) => {
+  if (url.length === 33) return +url.slice(-2, -1);
+  if (url.length === 34) return +url.slice(-3, -1);
+  if (url.length === 35) return +url.slice(-4, -1);
+};
+
+const necessaryData = (data) => {
+  return {
+    name: data.name,
+    power: data.power,
+    accuracy: data.accuracy,
+    pp: data.pp,
+  };
+};
+// ===========================================================================
+
+export const getPokemonMovesInfo = async (moves) => {
+  const pokemonMoves = pickRandomFourMoves(moves);
+
+  const ids = pokemonMoves.map((move) => {
+    const url = move.move.url;
+    return conditions(url);
+  });
+
+  const Data = await fetchMove(ids);
+
+  const necessaryMovesInfo = Data.map((data) => {
+    return necessaryData(data);
+  });
+
+  return necessaryMovesInfo;
 };

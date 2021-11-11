@@ -9,16 +9,23 @@ import classes from "./CutIn.module.css";
 const CutIn = () => {
   const [play] = useSound(battle);
   const [isLoaded, setIsLoaded] = useState(false);
-
   const history = useHistory();
-
-  const poke = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
   const enemy = useSelector((state) => state.enemy.enemy);
 
+  // TEST START
+  const firstPoke = useSelector((state) => state.user.userFirstPokemon);
+  const secondPoke = useSelector((state) => state.user.userSecondPokemon);
+  const firstEne = useSelector((state) => state.enemy.enemyFirstPokemon);
+  const secondEne = useSelector((state) => state.enemy.enemySecondPokemon);
+  console.log("firstPoke", firstPoke);
+  console.log("secondPoke", secondPoke);
+  console.log("firstEne", firstEne);
+  console.log("secondEne", secondEne);
+  // TEST END
+
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 0);
+    setIsLoaded(true);
     setTimeout(() => {
       history.replace("/battle");
     }, 4000);
@@ -26,6 +33,9 @@ const CutIn = () => {
       play();
     }, 3500);
   });
+      history.replace("battle");
+    }, 3000);
+  }, [history]);
 
   return (
     <div className={classes.container}>
@@ -56,18 +66,18 @@ const CutIn = () => {
           <img
             className={classes.poke_images}
             src={
-              poke.firstChoice.sprites.other["official-artwork"].front_default
+              user.firstChoice.sprites.other["official-artwork"].front_default
             }
-            alt={poke.firstChoice.forms[0].name}
+            alt={user.firstChoice.forms[0].name}
           />
         </div>
         <div className={classes.your_pokemon2}>
           <img
             className={classes.poke_images}
             src={
-              poke.secondChoice.sprites.other["official-artwork"].front_default
+              user.secondChoice.sprites.other["official-artwork"].front_default
             }
-            alt={poke.secondChoice.forms[0].name}
+            alt={user.secondChoice.forms[0].name}
           />
         </div>
         <p>You</p>
