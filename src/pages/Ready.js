@@ -69,54 +69,21 @@ const Timer = styled(Header.withComponent("div"))`
 
 const Ready = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const userPokemon = useSelector((state) => state.user.pokemon);
   const { data, isError, isLoading } = useFetchPokemon(
     randomNumbers.map((num) => `pokemon/${num}`)
   );
   if (isError) return <First>failed to load</First>;
   if (isLoading) return <First>loading...</First>;
 
-  const firstEnemy = data[0];
-  const secondEnemy = data[1];
-
   const waitMovesInfo = async () => {
-    dispatch(
-      enemyActions.createEnemy({
-        firstEnemy: firstEnemy,
-        secondEnemy: secondEnemy,
-      })
-    );
-
+    const firstEnemy = data[0];
+    const secondEnemy = data[1];
     const firstMoves = await getPokemonMovesInfo(firstEnemy.moves);
     const secondMoves = await getPokemonMovesInfo(secondEnemy.moves);
 
-    dispatch(
-      enemyActions.storeEnemyFirstPokemonInfo({
-        name: firstEnemy.name,
-        moves: [...firstMoves],
-        hp: {
-          current: firstEnemy.stats[0].base_stat,
-          max: firstEnemy.stats[0].base_stat,
-        },
-        attack: firstEnemy.stats[1].base_stat,
-        defence: firstEnemy.stats[2].base_stat,
-        speed: firstEnemy.stats[5].base_stat,
-      })
-    );
-
-    dispatch(
-      enemyActions.storeEnemySecondPokemonInfo({
-        name: secondEnemy.name,
-        moves: [...secondMoves],
-        hp: {
-          current: secondEnemy.stats[0].base_stat,
-          max: secondEnemy.stats[0].base_stat,
-        },
-        attack: secondEnemy.stats[1].base_stat,
-        defence: secondEnemy.stats[2].base_stat,
-        speed: secondEnemy.stats[5].base_stat,
-      })
-    );
+    dispatch(enemyActions.createEnemy([firstEnemy, firstMoves]));
+    dispatch(enemyActions.createEnemy([secondEnemy, secondMoves]));
   };
   waitMovesInfo();
 
@@ -131,8 +98,14 @@ const Ready = () => {
         <Content>
           <Para>Your Pokemon</Para>
           <Grid>
-            <Card dataItem={user.firstChoice} />
-            <Card dataItem={user.secondChoice} />
+            <Card
+              pokemonName={userPokemon[0].name}
+              imageSrc={userPokemon[0].images.animated}
+            />
+            <Card
+              pokemonName={userPokemon[1].name}
+              imageSrc={userPokemon[1].images.animated}
+            />
           </Grid>
         </Content>
         <Vs>VS</Vs>
@@ -141,7 +114,13 @@ const Ready = () => {
           <Grid>
             {data &&
               data.map((dataItem, idx) => (
-                <Card key={`ready-${idx}`} dataItem={dataItem} />
+                <Card
+                  key={`ready-${idx}`}
+                  pokemonName={dataItem.name}
+                  imageSrc={
+                    dataItem.sprites.other["official-artwork"].front_default
+                  }
+                />
               ))}
           </Grid>
         </Content>

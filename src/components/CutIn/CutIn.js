@@ -8,17 +8,17 @@ const CutIn = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
   const user = useSelector((state) => state.user.user);
-  const enemy = useSelector((state) => state.enemy.enemy);
+  const enemy = useSelector((state) => state.enemy.pokemon);
 
   // TEST START
-  const firstPoke = useSelector((state) => state.user.userFirstPokemon);
-  const secondPoke = useSelector((state) => state.user.userSecondPokemon);
-  const firstEne = useSelector((state) => state.enemy.enemyFirstPokemon);
-  const secondEne = useSelector((state) => state.enemy.enemySecondPokemon);
-  console.log("firstPoke", firstPoke);
-  console.log("secondPoke", secondPoke);
-  console.log("firstEne", firstEne);
-  console.log("secondEne", secondEne);
+  const firstPokemon = useSelector((state) => state.user.pokemon[0]);
+  const secondPokemon = useSelector((state) => state.user.pokemon[1]);
+  const firstEnemy = useSelector((state) => state.enemy.pokemon[0]);
+  const secondEnemy = useSelector((state) => state.enemy.pokemon[1]);
+  console.log("firstPoke", firstPokemon);
+  console.log("secondPoke", secondPokemon);
+  console.log("firstEne", firstEnemy);
+  console.log("secondEne", secondEnemy);
   // TEST END
 
   useEffect(() => {
@@ -36,19 +36,15 @@ const CutIn = () => {
         <div className={classes.enemy_pokemon1}>
           <img
             className={classes.poke_images}
-            src={
-              enemy.firstEnemy.sprites.other["official-artwork"].front_default
-            }
-            alt={enemy.firstEnemy.forms[0].name}
+            src={firstEnemy.images.animated}
+            alt={firstEnemy.name}
           />
         </div>
         <div className={classes.enemy_pokemon2}>
           <img
             className={classes.poke_images}
-            src={
-              enemy.secondEnemy.sprites.other["official-artwork"].front_default
-            }
-            alt={enemy.secondEnemy.forms[0].name}
+            src={secondEnemy.images.animated}
+            alt={secondEnemy.name}
           />
         </div>
       </div>
@@ -56,19 +52,15 @@ const CutIn = () => {
         <div className={classes.your_pokemon1}>
           <img
             className={classes.poke_images}
-            src={
-              user.firstChoice.sprites.other["official-artwork"].front_default
-            }
-            alt={user.firstChoice.forms[0].name}
+            src={firstPokemon.images.animated}
+            alt={firstPokemon.name}
           />
         </div>
         <div className={classes.your_pokemon2}>
           <img
             className={classes.poke_images}
-            src={
-              user.secondChoice.sprites.other["official-artwork"].front_default
-            }
-            alt={user.secondChoice.forms[0].name}
+            src={secondPokemon.images.animated}
+            alt={secondPokemon.name}
           />
         </div>
         <p>You</p>

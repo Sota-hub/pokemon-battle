@@ -2,32 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialEnemyState = {
   isSecondEnemy: false,
-  enemy: {
-    firstEnemy: null,
-    secondEnemy: null,
-  },
-  enemyFirstPokemon: {
-    name: "",
-    moves: [],
-    hp: {
-      current: null,
-      max: null,
-    },
-    attack: null,
-    defence: null,
-    speed: null,
-  },
-  enemySecondPokemon: {
-    name: "",
-    moves: [],
-    hp: {
-      current: null,
-      max: null,
-    },
-    attack: null,
-    defence: null,
-    speed: null,
-  },
+  pokemon: [],
 };
 
 const enemySlice = createSlice({
@@ -35,19 +10,29 @@ const enemySlice = createSlice({
   initialState: initialEnemyState,
   reducers: {
     createEnemy(state, action) {
-      state.enemy = action.payload;
-    },
-    storeEnemyFirstPokemonInfo(state, action) {
-      state.enemyFirstPokemon = action.payload;
-    },
-    storeEnemySecondPokemonInfo(state, action) {
-      state.enemySecondPokemon = action.payload;
+      const data = action.payload;
+      const newEnemy = {
+        name: data[0].name,
+        hp: {
+          current: data[0].stats[0].base_stat,
+          max: data[0].stats[0].base_stat,
+        },
+        attack: data[0].stats[1].base_stat,
+        defence: data[0].stats[2].base_stat,
+        speed: data[0].stats[5].base_stat,
+        images: {
+          animated: data[0].sprites.other["official-artwork"].front_default,
+          dotted: data[0].sprites.front_default,
+        },
+        moves: [...data[1]],
+      };
+      state.pokemon.push(newEnemy);
     },
     damageEnemyFirstPokemon(state, action) {
-      state.enemyFirstPokemon.hp.current -= action.payload;
+      state.pokemon[0].hp.current -= action.payload;
     },
     damageEnemySecondPokemon(state, action) {
-      state.enemySecondPokemon.hp.current -= action.payload;
+      state.pokemon[1].hp.current -= action.payload;
     },
   },
 });

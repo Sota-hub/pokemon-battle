@@ -4,28 +4,20 @@ import classes from "./BattleDisplay.module.scss";
 const BattleDisplay = ({ onFight, onChange, onItem }) => {
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
-  const user = useSelector((state) => state.user.user);
-  const enemy = useSelector((state) => state.enemy.enemy);
-  const userFirstPokemonHp = useSelector(
-    (state) => state.user.userFirstPokemon.hp
-  );
-  const userSecondPokemonHp = useSelector(
-    (state) => state.user.userSecondPokemon.hp
-  );
-  const enemyFirstPokemonHp = useSelector(
-    (state) => state.enemy.enemyFirstPokemon.hp
-  );
+  const userPokemon = useSelector((state) => state.user.pokemon);
+  const enemyPokemon = useSelector((state) => state.enemy.pokemon);
+  const userFirstPokemonHp = useSelector((state) => state.user.pokemon[0].hp);
+  const userSecondPokemonHp = useSelector((state) => state.user.pokemon[1].hp);
+  const enemyFirstPokemonHp = useSelector((state) => state.enemy.pokemon[0].hp);
   const enemySecondPokemonHp = useSelector(
-    (state) => state.enemy.enemySecondPokemon.hp
+    (state) => state.enemy.pokemon[1].hp
   );
 
-  const fightingUserPokemon = isSecondPokemon
-    ? user.secondChoice
-    : user.firstChoice;
+  const fightingUserPokemon = isSecondPokemon ? userPokemon[1] : userPokemon[0];
 
   const fightingEnemyPokemon = isSecondEnemy
-    ? enemy.secondEnemy
-    : enemy.firstEnemy;
+    ? enemyPokemon[1]
+    : enemyPokemon[0];
 
   const fightingUserPokemonHp = isSecondPokemon
     ? userSecondPokemonHp
@@ -48,7 +40,7 @@ const BattleDisplay = ({ onFight, onChange, onItem }) => {
       </div>
       <div className={classes.user_image}>
         <img
-          src={fightingUserPokemon.sprites.back_default}
+          src={fightingUserPokemon.images.dotted}
           alt={fightingUserPokemon.name}
         />
       </div>
@@ -63,7 +55,7 @@ const BattleDisplay = ({ onFight, onChange, onItem }) => {
       </div>
       <div className={classes.enemy_image}>
         <img
-          src={fightingEnemyPokemon.sprites.front_default}
+          src={fightingEnemyPokemon.images.dotted}
           alt={fightingEnemyPokemon.name}
         />
       </div>

@@ -10,16 +10,10 @@ const BattleFight = ({ setMessage }) => {
   const [moveNumber, setMoveNumber] = useState(0);
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
-  const userFirstPokemon = useSelector((state) => state.user.userFirstPokemon);
-  const userSecondPokemon = useSelector(
-    (state) => state.user.userSecondPokemon
-  );
-  const enemyFirstPokemon = useSelector(
-    (state) => state.enemy.enemyFirstPokemon
-  );
-  const enemySecondPokemon = useSelector(
-    (state) => state.enemy.enemySecondPokemon
-  );
+  const userFirstPokemon = useSelector((state) => state.user.pokemon[0]);
+  const userSecondPokemon = useSelector((state) => state.user.pokemon[1]);
+  const enemyFirstPokemon = useSelector((state) => state.enemy.pokemon[0]);
+  const enemySecondPokemon = useSelector((state) => state.enemy.pokemon[1]);
   const dispatch = useDispatch();
 
   const moveHandler = (index) => {
