@@ -33,9 +33,6 @@ const CutIn = () => {
       play();
     }, 3500);
   });
-      history.replace("battle");
-    }, 3000);
-  }, [history]);
 
   return (
     <div className={classes.container}>

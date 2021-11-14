@@ -50,6 +50,9 @@ const userSlice = createSlice({
     damageUserSecondPokemon(state, action) {
       state.userSecondPokemon.hp.current -= action.payload;
     },
+    changeIsSecondPokemon(state, action) {
+      state.isSecondPokemon = !state.isSecondPokemon;
+    },
   },
 });
 
