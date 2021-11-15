@@ -4,17 +4,38 @@ import styled from "styled-components";
 import Card from "../../LandingCards/Card";
 import TypeIt from "typeit-react";
 import ball from "./pokeball.png";
-// import { createContext } from "react";
-const BattleChange = () => {
-  const [firstPokemonOnScreen, setFirstPokemonOnScreen] = useState(true);
-  const [show, setShow] = useState(false);
-  const [damage, setDamage] = useState(null);
-  const user = useSelector((state) => state.user.user);
-  // const span = document.querySelector("span");
+import { useDispatch } from "react-redux";
+import { userActions } from "../../../store/userSlice";
 
-  // span.addEventListener("click", () => {
-  //   setFirstPokemonOnScreen(!firstPokemonOnScreen);
-  // });
+const BattleChange = () => {
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const user = useSelector((state) => state.user.user);
+  const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
+  const isAnime = useSelector((state) => state.user.isAnime);
+  const userFirstPokemonHp = useSelector(
+    (state) => state.user.userFirstPokemon.hp
+  );
+  const userSecondPokemonHp = useSelector(
+    (state) => state.user.userSecondPokemon.hp
+  );
+  const fightingUserPokemonHp = !isSecondPokemon
+    ? userSecondPokemonHp
+    : userFirstPokemonHp;
+
+  const onClickHandler = () => {
+    dispatch(userActions.changeIsSecondPokemon());
+    dispatch(userActions.changeIsAnime());
+    dispatch(userActions.changeIsShow());
+  };
+
+  setTimeout(() => {
+    if (isAnime) {
+      dispatch(userActions.changeIsAnime());
+    }
+  }, 2000);
+
+  const onAnime = isAnime ? "active-anime" : "";
 
   return (
     <BackGround>
@@ -25,14 +46,15 @@ const BattleChange = () => {
             onClick={() => {
               setShow(!show);
             }}
+            className={onAnime}
           >
-            {!firstPokemonOnScreen && (
+            {isSecondPokemon && (
               <Card
                 dataItem={user.firstChoice}
                 key={user.firstChoice.forms[0].name}
               />
             )}
-            {firstPokemonOnScreen && (
+            {!isSecondPokemon && (
               <Card
                 dataItem={user.secondChoice}
                 key={user.secondChoice.forms[0].name}
@@ -40,7 +62,7 @@ const BattleChange = () => {
             )}
           </div>
           {show && (
-            <Switch>
+            <Switch onClick={onClickHandler}>
               <TypeIt>
                 Do you want to switch a pokemon? <span> Yes</span>
                 <span> No</span>
@@ -51,18 +73,11 @@ const BattleChange = () => {
           <HbBar>
             <Bar
               id="hp"
-              value={damage}
-              max={
-                !firstPokemonOnScreen
-                  ? user.secondChoice.stats[0].base_stat
-                  : user.firstChoice.stats[0].base_stat
-              }
+              value={fightingUserPokemonHp.current}
+              max={fightingUserPokemonHp.max}
             />
             <Detail>
-              {damage}/
-              {!firstPokemonOnScreen
-                ? user.secondChoice.stats[0].base_stat
-                : user.firstChoice.stats[0].base_stat}
+              {fightingUserPokemonHp.current}/{fightingUserPokemonHp.max}
             </Detail>
           </HbBar>
         </Wrapper>
