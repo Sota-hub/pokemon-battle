@@ -10,15 +10,11 @@ import { userActions } from "../../../store/userSlice";
 const BattleChange = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const user = useSelector((state) => state.user.user);
+  const userPokemon = useSelector((state) => state.user.pokemon);
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isAnime = useSelector((state) => state.user.isAnime);
-  const userFirstPokemonHp = useSelector(
-    (state) => state.user.userFirstPokemon.hp
-  );
-  const userSecondPokemonHp = useSelector(
-    (state) => state.user.userSecondPokemon.hp
-  );
+  const userFirstPokemonHp = useSelector((state) => state.user.pokemon[0].hp);
+  const userSecondPokemonHp = useSelector((state) => state.user.pokemon[1].hp);
   const fightingUserPokemonHp = !isSecondPokemon
     ? userSecondPokemonHp
     : userFirstPokemonHp;
@@ -50,14 +46,14 @@ const BattleChange = () => {
           >
             {isSecondPokemon && (
               <Card
-                dataItem={user.firstChoice}
-                key={user.firstChoice.forms[0].name}
+                imageSrc={userPokemon[0].images.animated}
+                pokemonName={userPokemon[0].name}
               />
             )}
             {!isSecondPokemon && (
               <Card
-                dataItem={user.secondChoice}
-                key={user.secondChoice.forms[0].name}
+                imageSrc={userPokemon[1].images.animated}
+                pokemonName={userPokemon[1].name}
               />
             )}
           </div>
