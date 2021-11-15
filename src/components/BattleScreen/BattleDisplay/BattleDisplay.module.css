@@ -1,0 +1,108 @@
+.display {
+  background-image: url("./background_image.jpg");
+  background-size: cover;
+  grid-column: 1 / 3;
+  grid-row: 1 / 9;
+  position: relative;
+}
+
+.enemy_hp {
+  position: absolute;
+  background: #fff;
+  opacity: 0.9;
+  z-index: 1;
+  padding: 1em 2em 1em 4em;
+  clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0% 100%);
+  top: 10%;
+  right: 0%;
+}
+
+.user_hp {
+  position: absolute;
+  background: #fff;
+  opacity: 0.9;
+  z-index: 1;
+  padding: 1em 4em 1em 2em;
+  clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
+  bottom: 10%;
+  left: 0%;
+}
+
+.hp_bar {
+  width: 16em;
+  height: 0.8em;
+  margin-top: 1em;
+  background: #00ff00;
+}
+
+.enemy_image {
+  position: absolute;
+  bottom: 45%;
+  left: 65%;
+  width: 20em;
+  height: 20em;
+}
+
+.enemy_image img {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+}
+
+.user_image {
+  position: absolute;
+  bottom: -20%;
+  left: 0%;
+  width: 40em;
+  height: 40em;
+}
+
+.user_image img {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+}
+
+.link_container {
+  position: absolute;
+  bottom: 10%;
+  right: 0%;
+  display: grid;
+  grid-template-columns: 3fr;
+}
+
+.link_style {
+  color: #000;
+  text-decoration: none;
+  background: #fff;
+  margin-top: 1em;
+  padding: 1em 1em 1em 4em;
+  border-radius: 2em 0 0 2em;
+  box-shadow: 0 0.5em 0.5em rgba(0, 0, 0, 0.5);
+  list-style: none;
+}
+
+.active {
+  color: #fff;
+  background: #000;
+  box-shadow: none;
+}
+
+.active_anime_in {
+  animation-name: pokemon;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-duration: 1.5s;
+}
+
+@keyframes pokemon {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}

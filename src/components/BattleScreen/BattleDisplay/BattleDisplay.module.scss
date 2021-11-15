@@ -87,3 +87,36 @@
   background: #000;
   box-shadow: none;
 }
+.active_anime_in {
+  animation-name: pokemon;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-duration: 1.5s;
+}
+
+@keyframes pokemon {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+// .active_anime_out {
+//   animation-name: pokemon2;
+//   animation-timing-function: ease-in-out;
+//   animation-iteration-count: 1;
+//   animation-direction: normal;
+//   animation-duration: 1.5s;
+//   animation-fill-mode: forwards;
+// }
+
+// @keyframes pokemon2 {
+//   from {
+//     transform: translateY(0%);
+//   }
+//   to {
+//     transform: translateY(100%);
+//   }
+// }

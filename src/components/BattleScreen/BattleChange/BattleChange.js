@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../../store/userSlice";
 
 const BattleChange = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [damage, setDamage] = useState(null);
   const user = useSelector((state) => state.user.user);
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
+  const isAnime = useSelector((state) => state.user.isAnime);
   const userFirstPokemonHp = useSelector(
     (state) => state.user.userFirstPokemon.hp
   );
@@ -21,11 +22,20 @@ const BattleChange = () => {
   const fightingUserPokemonHp = !isSecondPokemon
     ? userSecondPokemonHp
     : userFirstPokemonHp;
-  const dispatch = useDispatch();
 
   const onClickHandler = () => {
     dispatch(userActions.changeIsSecondPokemon());
+    dispatch(userActions.changeIsAnime());
+    dispatch(userActions.changeIsShow());
   };
+
+  setTimeout(() => {
+    if (isAnime) {
+      dispatch(userActions.changeIsAnime());
+    }
+  }, 2000);
+
+  const onAnime = isAnime ? "active-anime" : "";
 
   return (
     <BackGround>
@@ -36,6 +46,7 @@ const BattleChange = () => {
             onClick={() => {
               setShow(!show);
             }}
+            className={onAnime}
           >
             {isSecondPokemon && (
               <Card
@@ -66,10 +77,7 @@ const BattleChange = () => {
               max={fightingUserPokemonHp.max}
             />
             <Detail>
-              {damage}/
-              {isSecondPokemon
-                ? user.secondChoice.stats[0].base_stat
-                : user.firstChoice.stats[0].base_stat}
+              {fightingUserPokemonHp.current}/{fightingUserPokemonHp.max}
             </Detail>
           </HbBar>
         </Wrapper>

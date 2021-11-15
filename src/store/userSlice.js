@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUserState = {
   isSecondPokemon: false,
+  isAnime: false,
+  isShow: true,
   user: {
     userName: "",
     firstChoice: null,
@@ -52,6 +54,12 @@ const userSlice = createSlice({
     },
     changeIsSecondPokemon(state, action) {
       state.isSecondPokemon = !state.isSecondPokemon;
+    },
+    changeIsAnime(state, action) {
+      state.isAnime = !state.isAnime;
+    },
+    changeIsShow(state, action) {
+      state.isShow = false;
     },
   },
 });
