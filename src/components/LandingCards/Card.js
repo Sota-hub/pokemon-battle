@@ -1,29 +1,12 @@
-import { useState } from "react";
-
 import styled from "styled-components";
-import Stats from "../Stats";
 
-const Card = ({ dataItem }) => {
-  const [isShown, setIsShown] = useState(false);
-
-  const mouseHover = () => {
-    setIsShown(true);
-  };
-
-  const mouseLeave = () => {
-    setIsShown(false);
-  };
-
+const Card = ({ pokemonName, imageSrc }) => {
   return (
-    <CardContainer onMouseEnter={mouseHover} onMouseLeave={mouseLeave}>
+    <CardContainer>
       <ImageContainer>
-        <Image
-          src={dataItem.sprites.other["official-artwork"].front_default}
-          alt={dataItem.forms[0].name}
-        />
+        <Image src={imageSrc} alt={pokemonName} />
       </ImageContainer>
-      <p>{dataItem.forms[0].name}</p>
-      {isShown && <Stats dataItem={dataItem} />}
+      <p>{pokemonName}</p>
     </CardContainer>
   );
 };

@@ -40,7 +40,10 @@ const singleCard = (dataItem, idx, choice) => (
       value={JSON.stringify(dataItem)}
       required
     />
-    <Card dataItem={dataItem} />
+    <Card
+      pokemonName={dataItem.name}
+      imageSrc={dataItem.sprites.other["official-artwork"].front_default}
+    />
   </CardLabel>
 );
 

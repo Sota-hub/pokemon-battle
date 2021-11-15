@@ -6,19 +6,13 @@ import { useRef } from "react";
 const BattleDisplay = ({ setCommand }) => {
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
-  const user = useSelector((state) => state.user.user);
-  const enemy = useSelector((state) => state.enemy.enemy);
-  const userFirstPokemonHp = useSelector(
-    (state) => state.user.userFirstPokemon.hp
-  );
-  const userSecondPokemonHp = useSelector(
-    (state) => state.user.userSecondPokemon.hp
-  );
-  const enemyFirstPokemonHp = useSelector(
-    (state) => state.enemy.enemyFirstPokemon.hp
-  );
+  const userPokemon = useSelector((state) => state.user.pokemon);
+  const enemyPokemon = useSelector((state) => state.enemy.pokemon);
+  const userFirstPokemonHp = useSelector((state) => state.user.pokemon[0].hp);
+  const userSecondPokemonHp = useSelector((state) => state.user.pokemon[1].hp);
+  const enemyFirstPokemonHp = useSelector((state) => state.enemy.pokemon[0].hp);
   const enemySecondPokemonHp = useSelector(
-    (state) => state.enemy.enemySecondPokemon.hp
+    (state) => state.enemy.pokemon[1].hp
   );
   const show = useSelector((state) => state.user.isShow);
   const isAnime = useSelector((state) => state.user.isAnime);
@@ -26,13 +20,11 @@ const BattleDisplay = ({ setCommand }) => {
   const onAnime = isAnime ? active_anime_in : null;
   const showAnime = show ? null : onAnime;
 
-  const fightingUserPokemon = isSecondPokemon
-    ? user.secondChoice
-    : user.firstChoice;
+  const fightingUserPokemon = isSecondPokemon ? userPokemon[1] : userPokemon[0];
 
   const fightingEnemyPokemon = isSecondEnemy
-    ? enemy.secondEnemy
-    : enemy.firstEnemy;
+    ? enemyPokemon[1]
+    : enemyPokemon[0];
 
   const fightingUserPokemonHp = isSecondPokemon
     ? userSecondPokemonHp
@@ -55,7 +47,7 @@ const BattleDisplay = ({ setCommand }) => {
       </div>
       <div className={classes.user_image}>
         <img
-          src={fightingUserPokemon.sprites.back_default}
+          src={fightingUserPokemon.images.dotted}
           alt={fightingUserPokemon.name}
           className={showAnime}
           ref={Anime}
@@ -72,7 +64,7 @@ const BattleDisplay = ({ setCommand }) => {
       </div>
       <div className={classes.enemy_image}>
         <img
-          src={fightingEnemyPokemon.sprites.front_default}
+          src={fightingEnemyPokemon.images.dotted}
           alt={fightingEnemyPokemon.name}
         />
       </div>
