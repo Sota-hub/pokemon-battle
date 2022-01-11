@@ -6,8 +6,8 @@ const initialUserState = {
   isAnime: false,
   isShow: true,
   isLastPokemon: false,
+  isDelay: false,
   pokemon: [],
-
 };
 
 const userSlice = createSlice({
@@ -39,20 +39,26 @@ const userSlice = createSlice({
     damageUserSecondPokemon(state, action) {
       state.pokemon[1].hp.current -= action.payload;
     },
+    recoverUserFirstPokemon(state, action) {
+      state.pokemon[0].hp.current += action.payload;
+    },
+    recoverUserSecondPokemon(state, action) {
+      state.pokemon[1].hp.current += action.payload;
+    },
     toggleIsSecondPokemon(state) {
       state.isSecondPokemon = !state.isSecondPokemon;
     },
     setIsLastPokemon(state) {
       state.isLastPokemon = true;
     },
-    changeIsSecondPokemon(state, action) {
-      state.isSecondPokemon = !state.isSecondPokemon;
-    },
-    changeIsAnime(state, action) {
+    changeIsAnime(state) {
       state.isAnime = !state.isAnime;
     },
-    changeIsShow(state, action) {
+    changeIsShow(state) {
       state.isShow = false;
+    },
+    changeIsDelay(state) {
+      state.isDelay = !state.isDelay;
     },
   },
 });

@@ -22,7 +22,7 @@ const Battle = () => {
       <BattleDisplay setCommand={setCommand} />
       {command === "home" && <BattleHome page="home" />}
       {command === "fight" && <BattleFight setMessage={setMessage} />}
-      {command === "change" && <BattleChange />}
+      {command === "change" && <BattleChange setMessage={setMessage} />}
       {command === "item" && <BattleItem />}
       <BattleMessage message={message} />
     </GridContainer>

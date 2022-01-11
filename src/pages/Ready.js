@@ -5,7 +5,6 @@ import { CountDown } from "../helpers/customFunctions";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../components/LandingCards/Card";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { enemyActions } from "../store/enemySlice";
 import { getPokemonMovesInfo } from "../helpers/customFunctions";
 
@@ -125,7 +124,6 @@ const Ready = () => {
           </Grid>
         </Content>
       </Wrap>
-      <Link to="battle">aaa</Link>
     </Fragment>
   );
 };

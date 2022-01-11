@@ -6,8 +6,11 @@ import TypeIt from "typeit-react";
 import ball from "./pokeball.png";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../store/userSlice";
+import change from "../../../sounds/change.mp3";
+import useSound from "use-sound";
 
 const BattleChange = () => {
+  const [play] = useSound(change);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const userPokemon = useSelector((state) => state.user.pokemon);
@@ -20,18 +23,21 @@ const BattleChange = () => {
     : userFirstPokemonHp;
 
   const onClickHandler = () => {
-    dispatch(userActions.changeIsSecondPokemon());
-    dispatch(userActions.changeIsAnime());
+    setTimeout(() => {
+      dispatch(userActions.toggleIsSecondPokemon());
+      dispatch(userActions.changeIsAnime());
+    }, 750);
     dispatch(userActions.changeIsShow());
+    dispatch(userActions.changeIsDelay());
+    play();
   };
 
   setTimeout(() => {
     if (isAnime) {
       dispatch(userActions.changeIsAnime());
+      dispatch(userActions.changeIsDelay());
     }
-  }, 2000);
-
-  const onAnime = isAnime ? "active-anime" : "";
+  }, 500);
 
   return (
     <BackGround>
@@ -41,8 +47,8 @@ const BattleChange = () => {
           <div
             onClick={() => {
               setShow(!show);
+              play();
             }}
-            className={onAnime}
           >
             {isSecondPokemon && (
               <Card

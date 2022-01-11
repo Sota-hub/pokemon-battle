@@ -30,7 +30,7 @@ const CutIn = () => {
     setTimeout(() => {
       play();
     }, 3500);
-  });
+  }, [history, play]);
 
   return (
     <div className={classes.container}>

@@ -28,11 +28,31 @@
   left: 0%;
 }
 
+.user_hp2 {
+  position: absolute;
+  background: #fff;
+  opacity: 0.9;
+  z-index: 1;
+  padding: 1em 4em 1em 2em;
+  clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
+  bottom: 10%;
+  left: 0%;
+}
+
+.user_hp2 ::-webkit-progress-bar {
+  background-color: gray;
+}
+
+.user_hp2 ::-webkit-progress-value {
+  background: #9c0d0d;
+}
+
 .hp_bar {
   width: 16em;
   height: 0.8em;
   margin-top: 1em;
-  background: #00ff00;
+  background: red;
+  -webkit-appearance: none;
 }
 
 .enemy_image {
@@ -95,7 +115,7 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
   animation-direction: normal;
-  animation-duration: 1.5s;
+  animation-duration: 0.75s;
 }
 
 @keyframes pokemon {
@@ -104,5 +124,23 @@
   }
   to {
     transform: translateY(0%);
+  }
+}
+
+.active_anime_out {
+  animation-name: pokemon2;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pokemon2 {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
   }
 }

@@ -2,9 +2,9 @@
   "$COMMENT": "HP * VALUE",
   "alive": {
     "potion": 0.1,
-    "super-portion": 0.25,
-    "hyper-portion": 0.5,
-    "max-portion": 1
+    "super-potion": 0.25,
+    "hyper-potion": 0.5,
+    "max-potion": 1
   },
   "dying": {
     "revive": 0.5,

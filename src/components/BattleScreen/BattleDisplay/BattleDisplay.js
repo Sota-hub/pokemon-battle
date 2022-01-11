@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./BattleDisplay.module.scss";
-import { active_anime_in } from "./BattleDisplay.module.scss";
-import { useRef } from "react";
+import { active_anime_in, active_anime_out } from "./BattleDisplay.module.scss";
 
 const BattleDisplay = ({ setCommand }) => {
+  const [hp, setHp] = useState(true);
   const isSecondPokemon = useSelector((state) => state.user.isSecondPokemon);
   const isSecondEnemy = useSelector((state) => state.enemy.isSecondEnemy);
   const userPokemon = useSelector((state) => state.user.pokemon);
@@ -16,9 +17,10 @@ const BattleDisplay = ({ setCommand }) => {
   );
   const show = useSelector((state) => state.user.isShow);
   const isAnime = useSelector((state) => state.user.isAnime);
-  const Anime = useRef();
-  const onAnime = isAnime ? active_anime_in : null;
-  const showAnime = show ? null : onAnime;
+  const isDelay = useSelector((state) => state.user.isDelay);
+  const onAnime = isAnime ? null : active_anime_in;
+  const delay = isDelay ? active_anime_out : null;
+  const showAnime = show ? null : `${delay} ${onAnime}`;
 
   const fightingUserPokemon = isSecondPokemon ? userPokemon[1] : userPokemon[0];
 
@@ -33,6 +35,16 @@ const BattleDisplay = ({ setCommand }) => {
   const fightingEnemyPokemonHp = isSecondEnemy
     ? enemySecondPokemonHp
     : enemyFirstPokemonHp;
+
+  const hpStyle = hp ? classes.user_hp : classes.user_hp2;
+
+  useEffect(() => {
+    if (fightingUserPokemonHp.current < fightingUserPokemonHp.max * 0.3) {
+      setHp(false);
+    } else {
+      setHp(true);
+    }
+  }, [fightingUserPokemonHp]);
 
   return (
     <div className={classes.display}>
@@ -50,10 +62,9 @@ const BattleDisplay = ({ setCommand }) => {
           src={fightingUserPokemon.images.dotted}
           alt={fightingUserPokemon.name}
           className={showAnime}
-          ref={Anime}
         />
       </div>
-      <div className={classes.user_hp}>
+      <div className={hpStyle}>
         <p>{fightingUserPokemon.name}</p>
         <progress
           className={classes.hp_bar}
@@ -81,7 +92,6 @@ const BattleDisplay = ({ setCommand }) => {
           className={classes.link_style}
           onClick={() => {
             setCommand("change");
-            console.log(Anime);
           }}
         >
           Change

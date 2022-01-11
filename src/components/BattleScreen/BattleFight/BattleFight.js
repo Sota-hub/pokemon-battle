@@ -15,6 +15,8 @@ const BattleFight = ({ setMessage }) => {
   const enemyFirstPokemon = useSelector((state) => state.enemy.pokemon[0]);
   const enemySecondPokemon = useSelector((state) => state.enemy.pokemon[1]);
   const isLastPokemon = useSelector((state) => state.user.isLastPokemon);
+  const isAnime = useSelector((state) => state.user.isAnime);
+  const isShow = useSelector((state) => state.user.isShow);
   const dispatch = useDispatch();
 
   const moveHandler = (index) => {
@@ -71,15 +73,31 @@ const BattleFight = ({ setMessage }) => {
     if (fightingUserPokemon.hp.current - userDamage <= 0) {
       if (!isLastPokemon) {
         dispatch(userActions.setIsLastPokemon());
-        dispatch(userActions.toggleIsSecondPokemon());
+        setTimeout(() => {
+          dispatch(userActions.toggleIsSecondPokemon());
+          dispatch(userActions.changeIsAnime());
+        }, 2000);
+        dispatch(userActions.changeIsDelay());
+        if (isShow) {
+          dispatch(userActions.changeIsShow());
+        }
         stop = true;
       }
       if (isLastPokemon) {
+        dispatch(userActions.changeIsDelay());
         console.log("YOU LOSE...");
         stop = true;
       }
     }
   };
+  // if (!isLastPokemon) {
+  setTimeout(() => {
+    if (isAnime) {
+      dispatch(userActions.changeIsAnime());
+      dispatch(userActions.changeIsDelay());
+    }
+  }, 1000);
+  // }
 
   const judgeEnemyDying = () => {
     if (fightingEnemyPokemon.hp.current - enemyDamage <= 0) {
@@ -99,6 +117,7 @@ const BattleFight = ({ setMessage }) => {
     if (fightingUserPokemon.speed > fightingEnemyPokemon.speed) {
       userMove();
       judgeEnemyDying();
+
       if (stop) return;
       setTimeout(() => {
         enemyMove();
@@ -109,6 +128,7 @@ const BattleFight = ({ setMessage }) => {
     if (fightingUserPokemon.speed < fightingEnemyPokemon.speed) {
       enemyMove();
       judgeUserDying();
+
       if (stop) return;
       setTimeout(() => {
         userMove();
